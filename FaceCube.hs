@@ -80,6 +80,15 @@ faceCubeToCubieCube fc = CubieCube {
     where (cp',co') = cpAndCo fc
           (ep',eo') = epAndEo fc
 
+cpAndCo :: FaceCube -> ([Corner], [Int])
+cpAndCo fc = unzip [(j,ori) | (ori, col1, col2) <- [cornerColors fc c | c <- [URF ..]],
+                              j <- [URF .. ],
+                              col1 == cornerColor !! (fromEnum j) !! 1 &&
+                              col2 == cornerColor !! (fromEnum j) !! 2]
+
+epAndEo :: FaceCube -> ([Edge], [Int])
+epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors fc i j | i <- [UR ..], j <- [UR ..]]
+
 cornerColors :: FaceCube -> Corner -> (Int, Color, Color)
 cornerColors fc c = (ori, col1, col2)
     where i       = fromEnum c
@@ -89,12 +98,6 @@ cornerColors fc c = (ori, col1, col2)
                               fs !! (fromEnum $ cornerFacelet !! i !! o) == D]
           col1    = fs !! (fromEnum $ cornerFacelet !! i !! ((ori+1) `mod` 3))
           col2    = fs !! (fromEnum $ cornerFacelet !! i !! ((ori+2) `mod` 3))
-
-cpAndCo :: FaceCube -> ([Corner], [Int])
-cpAndCo fc = unzip [(j,ori) | (ori, col1, col2) <- [cornerColors fc c | c <- [URF ..]],
-                              j <- [URF .. ],
-                              col1 == cornerColor !! (fromEnum j) !! 1 &&
-                              col2 == cornerColor !! (fromEnum j) !! 2]
 
 edgeColors :: FaceCube -> Edge -> Edge -> (Edge, Int)
 edgeColors fc i j
@@ -106,6 +109,3 @@ edgeColors fc i j
           ec  =            edgeColor   !! fromEnum j !! 0
           ef' = fromEnum $ edgeFacelet !! fromEnum i !! 1
           ec' =            edgeColor   !! fromEnum j !! 1
-
-epAndEo :: FaceCube -> ([Edge], [Int])
-epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors fc i j | i <- [UR ..], j <- [UR ..]]
