@@ -97,11 +97,15 @@ epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors fc i j | i <- [UR ..
 
 edgeColors :: FaceCube -> Edge -> Edge -> (Edge, Int)
 edgeColors fc i j
-    | (fs !! ef) == ec  && (fs !! ef') == ec' = (j,0)
-    | (fs !! ef) == ec' && (fs !! ef') == ec  = (j,1)
-    | otherwise                               = (j,-1)
-    where fs  = f fc
-          ef  = fromEnum $ edgeFacelet !! fromEnum i !! 0
-          ec  =            edgeColor   !! fromEnum j !! 0
-          ef' = fromEnum $ edgeFacelet !! fromEnum i !! 1
-          ec' =            edgeColor   !! fromEnum j !! 1
+    | col1 == ec  && col2 == ec' = (j,0)
+    | col1 == ec' && col2 == ec  = (j,1)
+    | otherwise                  = (j,-1)
+    where fs   = f fc
+          i'   = fromEnum i
+          j'   = fromEnum j
+          col1 = fs !! ef
+          col2 = fs !! ef'
+          ef   = fromEnum $ edgeFacelet !! i' !! 0
+          ec   =            edgeColor   !! j' !! 0
+          ef'  = fromEnum $ edgeFacelet !! i' !! 1
+          ec'  =            edgeColor   !! j' !! 1
