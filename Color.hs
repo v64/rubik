@@ -9,7 +9,7 @@ data Color = U
            | D
            | L
            | B
-    deriving (Eq, Show)
+    deriving (Bounded, Enum, Eq, Show)
 
 charToColor :: Char -> Color
 charToColor 'U' = U

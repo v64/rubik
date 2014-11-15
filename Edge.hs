@@ -14,4 +14,4 @@ data Edge = UR
           | FL
           | BL
           | BR
-    deriving (Eq, Show)
+    deriving (Bounded, Enum, Eq, Show)

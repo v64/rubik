@@ -10,4 +10,4 @@ data Corner = URF
             | DLF
             | DBL
             | DRB
-    deriving (Eq, Show)
+    deriving (Bounded, Enum, Eq, Show)
