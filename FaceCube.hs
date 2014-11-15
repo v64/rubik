@@ -1,6 +1,6 @@
 module FaceCube (
     strToFaceCube,
-    faceCubeToCubieCube
+    toCubieCube
 ) where
 
 import Color
@@ -66,8 +66,8 @@ strToFaceCube s = FaceCube {
     f = map charToColor s
 }
 
-faceCubeToCubieCube :: FaceCube -> CubieCube
-faceCubeToCubieCube fc = CubieCube {
+toCubieCube :: FaceCube -> CubieCube
+toCubieCube fc = CubieCube {
     cp = cp',
     co = co',
     ep = ep',
