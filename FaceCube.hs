@@ -63,12 +63,8 @@ data FaceCube = FaceCube {
 
 strToFaceCube :: String -> FaceCube
 strToFaceCube s = FaceCube {
-    f = strToFaceCube' s
+    f = map charToColor s
 }
-
-strToFaceCube' :: String -> [Color]
-strToFaceCube' []     = []
-strToFaceCube' (s:ss) = charToColor s : strToFaceCube' ss
 
 faceCubeToCubieCube :: FaceCube -> CubieCube
 faceCubeToCubieCube fc = CubieCube {
