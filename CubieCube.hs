@@ -1,5 +1,5 @@
 module CubieCube (
-    CubieCube
+    CubieCube (..)
 ) where
 
 import Corner

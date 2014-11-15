@@ -1,10 +1,12 @@
 module FaceCube (
-    strToFaceCube
+    strToFaceCube,
+    faceCubeToCubieCube
 ) where
 
 import Color
 import Corner
 import CubieCube
+import Edge
 import Facelet
 
 cornerColor :: [[Color]]
@@ -68,7 +70,15 @@ strToFaceCube' :: String -> [Color]
 strToFaceCube' []     = []
 strToFaceCube' (s:ss) = charToColor s : strToFaceCube' ss
 
--- faceCubeToCubieCube :: FaceCube -> CubieCube
+faceCubeToCubieCube :: FaceCube -> CubieCube
+faceCubeToCubieCube fc = CubieCube {
+    cp = cp',
+    co = co',
+    ep = ep',
+    eo = eo'
+}
+    where (cp',co') = cpAndCo fc
+          (ep',eo') = epAndEo fc
 
 cornerColors :: FaceCube -> Corner -> (Int, Color, Color)
 cornerColors fc c = (ori, col1, col2)
@@ -85,3 +95,17 @@ cpAndCo fc = unzip [(j,ori) | (ori, col1, col2) <- [cornerColors fc c | c <- [UR
                               j <- [URF .. ],
                               col1 == cornerColor !! (fromEnum j) !! 1 &&
                               col2 == cornerColor !! (fromEnum j) !! 2]
+
+edgeColors :: FaceCube -> Edge -> Edge -> (Edge, Int)
+edgeColors fc i j
+    | (fs !! ef) == ec  && (fs !! ef') == ec' = (j,0)
+    | (fs !! ef) == ec' && (fs !! ef') == ec  = (j,1)
+    | otherwise                               = (j,-1)
+    where fs  = f fc
+          ef  = fromEnum $ edgeFacelet !! fromEnum i !! 0
+          ec  =            edgeColor   !! fromEnum j !! 0
+          ef' = fromEnum $ edgeFacelet !! fromEnum i !! 1
+          ec' =            edgeColor   !! fromEnum j !! 1
+
+epAndEo :: FaceCube -> ([Edge], [Int])
+epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors fc i j | i <- [UR ..], j <- [UR ..]]
