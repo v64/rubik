@@ -30,7 +30,7 @@ getTwist :: CubieCube -> Int
 getTwist cc = foldl (\n x -> 3 * n + x) 0 $ init $ co cc
 
 getOrient :: CubieCube -> Int
-getOrient cc = 1
+getOrient cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 
 cornerParity :: CubieCube -> Int
 cornerParity cc = 1
