@@ -16,8 +16,8 @@ data CubieCube = CubieCube {
 
 toCoordCube :: CubieCube -> CoordCube
 toCoordCube cc = CoordCube {
-    twist   = getTwist     cc,
-    orient  = getOrient    cc,
+    ctwist  = getCtwist    cc,
+    eflip   = getEflip     cc,
     parity  = cornerParity cc,
     fr2br   = getFr2Br     cc,
     urf2dlf = getUrf2Dlf   cc,
@@ -26,11 +26,11 @@ toCoordCube cc = CoordCube {
     ur2df   = getUr2Df     cc
 }
 
-getTwist :: CubieCube -> Int
-getTwist cc = foldl (\n x -> 3 * n + x) 0 $ init $ co cc
+getCtwist :: CubieCube -> Int
+getCtwist cc = foldl (\n x -> 3 * n + x) 0 $ init $ co cc
 
-getOrient :: CubieCube -> Int
-getOrient cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
+getEflip :: CubieCube -> Int
+getEflip cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 
 cornerParity :: CubieCube -> Int
 cornerParity cc = 1

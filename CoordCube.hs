@@ -3,8 +3,8 @@ module CoordCube (
 ) where
 
 data CoordCube = CoordCube {
-    twist   :: Int,
-    orient  :: Int,
+    ctwist  :: Int,
+    eflip   :: Int,
     parity  :: Int,
     fr2br   :: Int,
     urf2dlf :: Int,
