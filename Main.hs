@@ -8,5 +8,5 @@ main = do
     putStrLn $ show fc
     let cc = toCubieCube fc
     putStrLn $ show cc
---    let c  = toCoordCube cc
---    putStrLn $ show c
+    let c  = toCoordCube cc
+    putStrLn $ show c

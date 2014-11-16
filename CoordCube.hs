@@ -4,7 +4,7 @@ module CoordCube (
 
 data CoordCube = CoordCube {
     twist   :: Int,
-    flip    :: Int,
+    orient  :: Int,
     parity  :: Int,
     fr2br   :: Int,
     urf2dlf :: Int,
