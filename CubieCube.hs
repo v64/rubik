@@ -68,5 +68,5 @@ rotate f a b xs = (take a xs) ++ (f $ slice a b xs) ++ (takeR (length xs - b - 1
 rotateLeft :: Int -> Int -> [a] -> [a]
 rotateLeft = rotate (\xs -> tail xs ++ [head xs])
 
-rotateRight:: Int -> Int -> [a] -> [a]
+rotateRight :: Int -> Int -> [a] -> [a]
 rotateRight = rotate (\xs -> last xs : init xs)
