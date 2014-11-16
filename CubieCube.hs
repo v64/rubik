@@ -27,12 +27,7 @@ toCoordCube cc = CoordCube {
 }
 
 getTwist :: CubieCube -> Int
-getTwist cc = getTwist' 0 [0..6] (co cc)
-
-getTwist' :: Int -> [Int] -> [Int] -> Int
-getTwist' n []     _  = n
-getTwist' n (x:xs) co = getTwist' n' xs co
-    where n' = 3 * n + (co !! x)
+getTwist cc = foldl (\n x -> 3 * n + x) 0 (init $ co cc)
 
 getOrient :: CubieCube -> Int
 getOrient cc = 1
