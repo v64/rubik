@@ -58,12 +58,12 @@ edgeFacelet = [[U6, R2],
                [B4, R6]]
 
 data FaceCube = FaceCube {
-    f :: [Color]
+    cols :: [Color]
 } deriving (Eq, Show)
 
 toFaceCube :: String -> FaceCube
 toFaceCube s = FaceCube {
-    f = map charToColor s
+    cols = map charToColor s
 }
 
 toCubieCube :: FaceCube -> CubieCube
@@ -85,7 +85,7 @@ cpAndCo fc = unzip [(j,ori) | (ori, col1, col2) <- [cornerColors fc c | c <- [UR
 cornerColors :: FaceCube -> Corner -> (Int, Color, Color)
 cornerColors fc c = (ori, col1, col2)
     where i       = fromEnum c
-          fs      = f fc
+          fs      = cols fc
           cfi     = cornerFacelet !! i
           ori     = head [o | o <- [0..2],
                               fs !! (fromEnum $ cfi !! o) == U ||
@@ -101,7 +101,7 @@ edgeColors fc i j
     | col1 == ec1 && col2 == ec2 = (j,0)
     | col1 == ec2 && col2 == ec1 = (j,1)
     | otherwise                  = (j,-1)
-    where fs   = f fc
+    where fs   = cols fc
           i'   = fromEnum i
           j'   = fromEnum j
           col1 = fs !! fromEnum ef1
