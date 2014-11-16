@@ -51,5 +51,5 @@ getUr2Df :: CubieCube -> Int
 getUr2Df cc = 1
 
 choose :: (RealFrac a, Enum a) => a -> a -> Int
-choose n k = (fromIntegral $ truncate p) :: Int
+choose n k  = (fromIntegral $ truncate p) :: Int
     where p = product [(n + 1 - i) / i | i <- [1..k]]
