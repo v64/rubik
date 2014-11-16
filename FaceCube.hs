@@ -1,5 +1,5 @@
 module FaceCube (
-    strToFaceCube,
+    toFaceCube,
     toCubieCube
 ) where
 
@@ -61,8 +61,8 @@ data FaceCube = FaceCube {
     f :: [Color]
 } deriving (Eq, Show)
 
-strToFaceCube :: String -> FaceCube
-strToFaceCube s = FaceCube {
+toFaceCube :: String -> FaceCube
+toFaceCube s = FaceCube {
     f = map charToColor s
 }
 

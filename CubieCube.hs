@@ -1,7 +1,9 @@
 module CubieCube (
-    CubieCube (..)
+    CubieCube (..),
+--    toCoordCube
 ) where
 
+import CoordCube
 import Corner
 import Edge
 
@@ -11,3 +13,5 @@ data CubieCube = CubieCube {
     ep :: [Edge],
     eo :: [Int]
 } deriving (Eq, Show)
+
+-- toCoordCube :: CubieCube -> CoordCube
