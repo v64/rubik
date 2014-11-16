@@ -36,7 +36,25 @@ cornerParity :: CubieCube -> Int
 cornerParity cc = 1
 
 getFr2Br :: CubieCube -> Int
-getFr2Br cc = 1
+getFr2Br cc = 24 * a + b
+    where a = getFr2BrA cc
+          b = getFr2BrB cc
+
+getFr2BrA :: CubieCube -> Int
+getFr2BrA cc = sum $ getFr2BrA' 0 $ reverse $ ep cc
+
+getFr2BrA' :: Int -> [Edge] -> [Int]
+getFr2BrA' _ []     = []
+getFr2BrA' x (e:es) = e' ++ getFr2BrA' x' es
+    where (e',x')  = if fri <= ei && ei <= bri then ([c], (x+1)) else ([], x)
+          c        = (fromIntegral $ (11-i) `choose` (x+1)) :: Int
+          i        = length es
+          ei       = fromEnum e
+          fri      = fromEnum FR
+          bri      = fromEnum BR
+
+getFr2BrB :: Int
+getFr2BrB = 1
 
 getUrf2Dlf :: CubieCube -> Int
 getUrf2Dlf cc = 1
@@ -50,9 +68,16 @@ getUb2Df cc = 1
 getUr2Df :: CubieCube -> Int
 getUr2Df cc = 1
 
-choose :: (RealFrac a, Enum a) => a -> a -> Int
-choose n k  = (fromIntegral $ truncate p) :: Int
-    where p = product [(n + 1 - i) / i | i <- [1..k]]
+choose :: Int -> Int -> Integer
+choose n k
+    | n == k    = 1
+    | n == 0    = 0
+    | k == 0    = 1
+    | otherwise = (chooseIndex !! (n-1) !! (k-1)) +
+                  (chooseIndex !! (n-1) !! k)
+
+chooseIndex :: [[Integer]]
+chooseIndex = [[choose n k | k <- [0..]] | n <- [0..]]
 
 slice :: Int -> Int -> [a] -> [a]
 slice a b xs = take (b-a+1) . drop a $ xs
