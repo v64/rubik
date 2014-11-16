@@ -41,20 +41,20 @@ getFr2Br cc = 24 * a + b
           b = getFr2BrB cc
 
 getFr2BrA :: CubieCube -> Int
-getFr2BrA cc = sum $ getFr2BrA' 0 $ reverse $ ep cc
+getFr2BrA cc = getFr2BrA' 0 $ reverse $ ep cc
 
-getFr2BrA' :: Int -> [Edge] -> [Int]
-getFr2BrA' _ []     = []
-getFr2BrA' x (e:es) = e' ++ getFr2BrA' x' es
-    where (e',x')  = if fri <= ei && ei <= bri then ([c], (x+1)) else ([], x)
-          c        = (fromIntegral $ (11-i) `choose` (x+1)) :: Int
-          i        = length es
-          ei       = fromEnum e
-          fri      = fromEnum FR
-          bri      = fromEnum BR
+getFr2BrA' :: Int -> [Edge] -> Int
+getFr2BrA' _ []     = 0
+getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
+    where (e',x')   = if fri <= ei && ei <= bri then (c, (x+1)) else (0, x)
+          c         = (fromIntegral $ (11-i) `choose` (x+1)) :: Int
+          i         = length es
+          ei        = fromEnum e
+          fri       = fromEnum FR
+          bri       = fromEnum BR
 
-getFr2BrB :: Int
-getFr2BrB = 1
+getFr2BrB :: CubieCube -> Int
+getFr2BrB cc = 1
 
 getUrf2Dlf :: CubieCube -> Int
 getUrf2Dlf cc = 1
