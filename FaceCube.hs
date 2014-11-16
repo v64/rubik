@@ -94,15 +94,14 @@ cornerColors fc c = (ori, col1, col2)
           col2    = fs !! (fromEnum $ cfi !! ((ori+2) `mod` 3))
 
 epAndEo :: FaceCube -> ([Edge], [Int])
-epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors fc i j | i <- [UR ..], j <- [UR ..]]
+epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors (cols fc) i j | i <- [UR ..], j <- [UR ..]]
 
-edgeColors :: FaceCube -> Edge -> Edge -> (Edge, Int)
-edgeColors fc i j
+edgeColors :: [Color] -> Edge -> Edge -> (Edge, Int)
+edgeColors fs i j
     | col1 == ec1 && col2 == ec2 = (j,0)
     | col1 == ec2 && col2 == ec1 = (j,1)
     | otherwise                  = (j,-1)
-    where fs   = cols fc
-          i'   = fromEnum i
+    where i'   = fromEnum i
           j'   = fromEnum j
           col1 = fs !! fromEnum ef1
           col2 = fs !! fromEnum ef2
