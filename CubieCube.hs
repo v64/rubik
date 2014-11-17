@@ -33,7 +33,7 @@ getEflip :: CubieCube -> Int
 getEflip cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 
 cornerParity :: CubieCube -> Int
-cornerParity cc = 1
+cornerParity cc = -1
 
 getFr2Br :: CubieCube -> Int
 getFr2Br cc = 24 * a + b
@@ -130,13 +130,13 @@ rotateCorner6' k cs i = if cp /= i then rotateCorner6' k' cs' i else (cs,k)
           cs' = rotateLeft 0 i cs
 
 getUr2Ul :: CubieCube -> Int
-getUr2Ul cc = 1
+getUr2Ul cc = -1
 
 getUb2Df :: CubieCube -> Int
-getUb2Df cc = 1
+getUb2Df cc = -1
 
 getUr2Df :: CubieCube -> Int
-getUr2Df cc = 1
+getUr2Df cc = -1
 
 choose :: Int -> Int -> Int
 choose n k
