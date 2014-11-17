@@ -54,31 +54,31 @@ getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
           bri       = fromEnum BR
 
 getFr2BrB :: CubieCube -> Int
-getFr2BrB cc = getFr2BrB' (getEdge4 cc) 3 0
+getFr2BrB cc = getFr2BrB' (getFr2BrEdge4 cc) 3 0
 
 getFr2BrB' :: [Edge] -> Int -> Int -> Int
 getFr2BrB' _  0 b = b
 getFr2BrB' es i b = getFr2BrB' es' i' b'
-    where (es',k) = rotateEdge4 es i
+    where (es',k) = rotateFr2BrEdge4 es i
           i'      = (i-1)
           b'      = (i+1) * b + k
 
-getEdge4 :: CubieCube -> [Edge]
-getEdge4 cc = reverse $ getEdge4' $ reverse $ ep cc
+getFr2BrEdge4 :: CubieCube -> [Edge]
+getFr2BrEdge4 cc = reverse $ getFr2BrEdge4' $ reverse $ ep cc
 
-getEdge4' :: [Edge] -> [Edge]
-getEdge4' []     = []
-getEdge4' (e:es) = e' ++ getEdge4' es
+getFr2BrEdge4' :: [Edge] -> [Edge]
+getFr2BrEdge4' []     = []
+getFr2BrEdge4' (e:es) = e' ++ getFr2BrEdge4' es
     where e'     = if fri <= ei && ei <= bri then [e] else []
           ei     = fromEnum e
           fri    = fromEnum FR
           bri    = fromEnum BR
 
-rotateEdge4 :: [Edge] -> Int -> ([Edge], Int)
-rotateEdge4 es i = rotateEdge4' 0 es i
+rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
+rotateFr2BrEdge4 es i = rotateFr2BrEdge4' 0 es i
 
-rotateEdge4' :: Int -> [Edge] -> Int -> ([Edge], Int)
-rotateEdge4' k es i = if ep /= i+8 then rotateEdge4' k' es' i else (es,k)
+rotateFr2BrEdge4' :: Int -> [Edge] -> Int -> ([Edge], Int)
+rotateFr2BrEdge4' k es i = if ep /= i+8 then rotateFr2BrEdge4' k' es' i else (es,k)
     where ep  = fromEnum $ es !! i
           k'  = k+1
           es' = rotateLeft 0 i es
