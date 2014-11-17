@@ -47,7 +47,7 @@ getFr2BrA' :: Int -> [Edge] -> Int
 getFr2BrA' _ []     = 0
 getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
     where (e',x')   = if fri <= ei && ei <= bri then (c, (x+1)) else (0, x)
-          c         = (fromIntegral $ (11-i) `choose` (x+1)) :: Int
+          c         = (11-i) `choose` (x+1)
           i         = length es
           ei        = fromEnum e
           fri       = fromEnum FR
@@ -95,7 +95,7 @@ getUb2Df cc = 1
 getUr2Df :: CubieCube -> Int
 getUr2Df cc = 1
 
-choose :: Int -> Int -> Integer
+choose :: Int -> Int -> Int
 choose n k
     | n == k    = 1
     | n == 0    = 0
@@ -103,7 +103,7 @@ choose n k
     | otherwise = (chooseIndex !! (n-1) !! (k-1)) +
                   (chooseIndex !! (n-1) !! k)
 
-chooseIndex :: [[Integer]]
+chooseIndex :: [[Int]]
 chooseIndex = [[choose n k | k <- [0..]] | n <- [0..]]
 
 slice :: Int -> Int -> [a] -> [a]
