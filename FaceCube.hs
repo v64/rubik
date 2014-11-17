@@ -79,7 +79,7 @@ toCubieCube fc = CubieCube {
 
 cpAndCo :: FaceCube -> ([Corner], [Int])
 cpAndCo fc = unzip [(j,ori) | (col1, col2, ori) <- [cornerColors (cols fc) c | c <- [URF ..]],
-                              j <- [URF .. ],
+                              j <- [URF ..],
                               col1 == cornerColor !! (fromEnum j) !! 1 &&
                               col2 == cornerColor !! (fromEnum j) !! 2]
 
