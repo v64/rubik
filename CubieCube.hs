@@ -18,7 +18,7 @@ toCoordCube :: CubieCube -> CoordCube
 toCoordCube cc = CoordCube {
     ctwist  = getCtwist    cc,
     eflip   = getEflip     cc,
-    parity  = cornerParity cc,
+    parity  = getParity    cc,
     fr2br   = getFr2Br     cc,
     urf2dlf = getUrf2Dlf   cc,
     ur2ul   = getUr2Ul     cc,
@@ -32,8 +32,8 @@ getCtwist cc = foldl (\n x -> 3 * n + x) 0 $ init $ co cc
 getEflip :: CubieCube -> Int
 getEflip cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 
-cornerParity :: CubieCube -> Int
-cornerParity cc = -1
+getParity :: CubieCube -> Int
+getParity cc = -1
 
 getFr2Br :: CubieCube -> Int
 getFr2Br cc = 24 * a + b
