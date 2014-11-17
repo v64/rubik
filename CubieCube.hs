@@ -78,9 +78,8 @@ rotateEdge4 :: [Edge] -> Int -> (Int, [Edge])
 rotateEdge4 es i = rotateEdge4' 0 es i
 
 rotateEdge4' :: Int -> [Edge] -> Int -> (Int, [Edge])
-rotateEdge4' k es i = r
-    where r   = if ep /= i+8 then rotateEdge4' k' es' i else (k,es)
-          ep  = fromEnum $ es !! i
+rotateEdge4' k es i = if ep /= i+8 then rotateEdge4' k' es' i else (k,es)
+    where ep  = fromEnum $ es !! i
           k'  = k+1
           es' = rotateLeft 0 i es
 
