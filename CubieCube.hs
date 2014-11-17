@@ -60,7 +60,6 @@ getEdge4' :: [Edge] -> [Edge]
 getEdge4' []     = []
 getEdge4' (e:es) = e' ++ getEdge4' es
     where e'     = if fri <= ei && ei <= bri then [e] else []
-          i      = length es
           ei     = fromEnum e
           fri    = fromEnum FR
           bri    = fromEnum BR
