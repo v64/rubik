@@ -219,8 +219,8 @@ rotateUb2DfEdge3 es i = rotateUb2DfEdge3' 0 es i
 
 rotateUb2DfEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3' k es i = if ep /= (ubi+i) then rotateUb2DfEdge3' k' es' i else (es,k)
-    where ep = fromEnum $ es !! i
-          k' = k+1
+    where ep  = fromEnum $ es !! i
+          k'  = k+1
           es' = rotateLeft 0 i es
           ubi = fromEnum UB
 
