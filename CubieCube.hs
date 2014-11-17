@@ -59,9 +59,9 @@ getFr2BrB cc = getFr2BrB' (getEdge4 cc) 3 0
 getFr2BrB' :: [Edge] -> Int -> Int -> Int
 getFr2BrB' _  0 b = b
 getFr2BrB' es i b = getFr2BrB' es' i' b'
-    where i'      = (i-1)
+    where (k,es') = rotateEdge4 es i
+          i'      = (i-1)
           b'      = (i+1) * b + k
-          (k,es') = rotateEdge4 es i
 
 getEdge4 :: CubieCube -> [Edge]
 getEdge4 cc = reverse $ getEdge4' $ reverse $ ep cc
