@@ -130,7 +130,50 @@ rotateCorner6' k cs i = if cp /= i then rotateCorner6' k' cs' i else (cs,k)
           cs' = rotateLeft 0 i cs
 
 getUr2Ul :: CubieCube -> Int
-getUr2Ul cc = -1
+getUr2Ul cc = 6 * a + b
+    where a = getUr2UlA cc
+          b = getUr2UlB cc
+
+getUr2UlA :: CubieCube -> Int
+getUr2UlA cc = getUr2UlA' 0 $ ep cc
+
+getUr2UlA' :: Int -> [Edge] -> Int
+getUr2UlA' _ []     = 0
+getUr2UlA' x (e:es) = e' + getUr2UlA' x' es
+    where (e',x') = if ei <= uli then (ch, (x+1)) else (0, x)
+          ch      = i `choose` (x+1)
+          i       = 11 - length es
+          ei      = fromEnum e
+          uli     = fromEnum UL
+
+getUr2UlB :: CubieCube -> Int
+getUr2UlB cc = getUr2UlB' (getEdge3 cc) 2 0
+
+getUr2UlB' :: [Edge] -> Int -> Int -> Int
+getUr2UlB' _  0 b = b
+getUr2UlB' es i b = getUr2UlB' es' i' b'
+    where (es',k) = rotateEdge3 es i
+          i'      = (i-1)
+          b'      = (i+1) * b + k
+
+getEdge3 :: CubieCube -> [Edge]
+getEdge3 cc = getEdge3' $ ep cc
+
+getEdge3' :: [Edge] -> [Edge]
+getEdge3' []     = []
+getEdge3' (e:es) = e' ++ getEdge3' es
+    where e'  = if ei <= uli then [e] else []
+          ei  = fromEnum e
+          uli = fromEnum UL
+
+rotateEdge3 :: [Edge] -> Int -> ([Edge], Int)
+rotateEdge3 es i = rotateEdge3' 0 es i
+
+rotateEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
+rotateEdge3' k es i = if ep /= i then rotateEdge3' k' es' i else (es,k)
+    where ep  = fromEnum $ es !! i
+          k'  = k+1
+          es' = rotateLeft 0 i es
 
 getUb2Df :: CubieCube -> Int
 getUb2Df cc = -1
