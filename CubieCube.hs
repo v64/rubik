@@ -46,8 +46,8 @@ getFr2BrA cc = getFr2BrA' 0 $ reverse $ ep cc
 getFr2BrA' :: Int -> [Edge] -> Int
 getFr2BrA' _ []     = 0
 getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
-    where (e',x')   = if fri <= ei && ei <= bri then (c, (x+1)) else (0, x)
-          c         = (11-i) `choose` (x+1)
+    where (e',x')   = if fri <= ei && ei <= bri then (ch, (x+1)) else (0, x)
+          ch        = (11-i) `choose` (x+1)
           i         = length es
           ei        = fromEnum e
           fri       = fromEnum FR
