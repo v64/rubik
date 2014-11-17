@@ -106,9 +106,9 @@ getUrf2DlfB cc = getUrf2DlfB' (getCorner6 cc) 5 0
 getUrf2DlfB' :: [Corner] -> Int -> Int -> Int
 getUrf2DlfB' _  0 b = b
 getUrf2DlfB' cs i b = getUrf2DlfB' cs' i' b'
-    where (cs',k) = rotateCorner6 cs i
-          i'      = (i-1)
-          b'      = (i+1) * b + k
+    where (cs',k)   = rotateCorner6 cs i
+          i'        = (i-1)
+          b'        = (i+1) * b + k
 
 getCorner6 :: CubieCube -> [Corner]
 getCorner6 cc = getCorner6' $ cp cc
