@@ -101,30 +101,30 @@ getUrf2DlfA' x (c:cs) = c' + getUrf2DlfA' x' cs
           dlfi    = fromEnum DLF
 
 getUrf2DlfB :: CubieCube -> Int
-getUrf2DlfB cc = getUrf2DlfB' (getCorner6 cc) 5 0
+getUrf2DlfB cc = getUrf2DlfB' (getUrf2DlfCorner6 cc) 5 0
 
 getUrf2DlfB' :: [Corner] -> Int -> Int -> Int
 getUrf2DlfB' _  0 b = b
 getUrf2DlfB' cs i b = getUrf2DlfB' cs' i' b'
-    where (cs',k)   = rotateCorner6 cs i
+    where (cs',k)   = rotateUrf2DlfCorner6 cs i
           i'        = (i-1)
           b'        = (i+1) * b + k
 
-getCorner6 :: CubieCube -> [Corner]
-getCorner6 cc = getCorner6' $ cp cc
+getUrf2DlfCorner6 :: CubieCube -> [Corner]
+getUrf2DlfCorner6 cc = getUrf2DlfCorner6' $ cp cc
 
-getCorner6' :: [Corner] -> [Corner]
-getCorner6' []     = []
-getCorner6' (c:cs) = c' ++ getCorner6' cs
+getUrf2DlfCorner6' :: [Corner] -> [Corner]
+getUrf2DlfCorner6' []     = []
+getUrf2DlfCorner6' (c:cs) = c' ++ getUrf2DlfCorner6' cs
     where c'       = if ci <= dlfi then [c] else []
           ci       = fromEnum c
           dlfi     = fromEnum DLF
 
-rotateCorner6 :: [Corner] -> Int -> ([Corner], Int)
-rotateCorner6 cs i = rotateCorner6' 0 cs i
+rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
+rotateUrf2DlfCorner6 cs i = rotateUrf2DlfCorner6' 0 cs i
 
-rotateCorner6' :: Int -> [Corner] -> Int -> ([Corner], Int)
-rotateCorner6' k cs i = if cp /= i then rotateCorner6' k' cs' i else (cs,k)
+rotateUrf2DlfCorner6' :: Int -> [Corner] -> Int -> ([Corner], Int)
+rotateUrf2DlfCorner6' k cs i = if cp /= i then rotateUrf2DlfCorner6' k' cs' i else (cs,k)
     where cp  = fromEnum $ cs !! i
           k'  = k+1
           cs' = rotateLeft 0 i cs
