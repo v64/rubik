@@ -53,6 +53,18 @@ getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
           fri       = fromEnum FR
           bri       = fromEnum BR
 
+getEdge4 :: CubieCube -> [Edge]
+getEdge4 cc = reverse $ getEdge4' $ reverse $ ep cc
+
+getEdge4' :: [Edge] -> [Edge]
+getEdge4' []     = []
+getEdge4' (e:es) = e' ++ getEdge4' es
+    where e'     = if fri <= ei && ei <= bri then [e] else []
+          i      = length es
+          ei     = fromEnum e
+          fri    = fromEnum FR
+          bri    = fromEnum BR
+
 getFr2BrB :: CubieCube -> Int
 getFr2BrB cc = 1
 
