@@ -3,7 +3,8 @@ import FaceCube
 
 main :: IO ()
 main = do
-    let facelets = "DUDLUDLFDRBRFRBLUUBUBLFRLDFFFUDDBRDRBFUBLUULDFRLRBLBRF"
+    --let facelets = "DUDLUDLFDRBRFRBLUUBUBLFRLDFFFUDDBRDRBFUBLUULDFRLRBLBRF"
+    let facelets = "RBDDURLDUBUFDRRUBLULRLFFRLFBFRFDLLRUDBFBLUBUDLUFDBRBFD"
     let fc = toFaceCube facelets
     putStrLn $ show fc
     let cc = toCubieCube fc
