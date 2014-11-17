@@ -98,8 +98,8 @@ epAndEo fc = unzip $ filter (\(a,b) -> b /= -1) [edgeColors (cols fc) i j | i <-
 
 edgeColors :: [Color] -> Edge -> Edge -> (Edge, Int)
 edgeColors fs i j
-    | col1 == ec1 && col2 == ec2 = (j,0)
-    | col1 == ec2 && col2 == ec1 = (j,1)
+    | col1 == ec1 && col2 == ec2 = (j, 0)
+    | col1 == ec2 && col2 == ec1 = (j, 1)
     | otherwise                  = (j,-1)
     where i'   = fromEnum i
           j'   = fromEnum j
