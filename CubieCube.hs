@@ -16,14 +16,14 @@ data CubieCube = CubieCube {
 
 toCoordCube :: CubieCube -> CoordCube
 toCoordCube cc = CoordCube {
-    ctwist  = getCtwist    cc,
-    eflip   = getEflip     cc,
-    parity  = getParity    cc,
-    fr2br   = getFr2Br     cc,
-    urf2dlf = getUrf2Dlf   cc,
-    ur2ul   = getUr2Ul     cc,
-    ub2df   = getUb2Df     cc,
-    ur2df   = getUr2Df     cc
+    ctwist  = getCtwist  cc,
+    eflip   = getEflip   cc,
+    parity  = getParity  cc,
+    fr2br   = getFr2Br   cc,
+    urf2dlf = getUrf2Dlf cc,
+    ur2ul   = getUr2Ul   cc,
+    ub2df   = getUb2Df   cc,
+    ur2df   = getUr2Df   cc
 }
 
 getCtwist :: CubieCube -> Int
