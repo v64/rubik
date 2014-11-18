@@ -271,7 +271,9 @@ takeR n l = go (drop n l) l
           go (_:xs) (_:ys) = go xs ys
 
 rotate :: ([a] -> [a]) -> Int -> Int -> [a] -> [a]
-rotate f a b xs = (take a xs) ++ (f $ slice a b xs) ++ (takeR (length xs - b - 1) xs)
+rotate f a b xs = (take a xs) ++
+                  (f $ slice a b xs) ++
+                  (takeR (length xs - b - 1) xs)
 
 rotateLeft :: Int -> Int -> [a] -> [a]
 rotateLeft  = rotate (\xs -> tail xs ++ [head xs])
