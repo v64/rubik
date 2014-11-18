@@ -38,9 +38,10 @@ getParity cc  = n `mod` 2
           ps  = [(cp' !! j, cp' !! i)
                 | i <- [7,6..1],
                   j <- [i-1,i-2..0]]
-          n   = sum $ map (\(a,b) -> if   a > b
-                                     then 1
-                                     else 0) $ ps
+          n   = sum $ map (\(a,b) ->
+                          if   a > b
+                          then 1
+                          else 0) ps
 
 getFr2Br :: CubieCube -> Int
 getFr2Br cc = 24 * a + b
