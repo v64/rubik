@@ -95,7 +95,7 @@ cColors fs c   = (col1, col2, ori)
           col2 = fs !! (fromEnum $ cfi !! ((ori+2) `mod` 3))
 
 epAndEo :: FaceCube -> ([Edge], [Int])
-epAndEo fc = unzip $ filter (\(a,b) -> b /= -1)
+epAndEo fc = unzip $ filter (\(_,b) -> b /= -1)
              [eColors (cols fc) i j
              | i <- [UR ..],
                j <- [UR ..]]
