@@ -35,9 +35,9 @@ getEflip  cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 getParity :: CubieCube -> Int
 getParity cc  = n `mod` 2
     where cp' = cp cc
-          ps  = concat [[(cp' !! j, cp' !! i)
-                        | j <- reverse [0..(i-1)]]
-                        | i <- reverse [1..7]]
+          ps  = [(cp' !! j, cp' !! i)
+                | i <- reverse [1..7],
+                  j <- reverse [0..(i-1)]]
           n   = sum $ map (\(a,b) -> if   a > b
                                      then 1
                                      else 0) $ ps
