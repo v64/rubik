@@ -249,7 +249,56 @@ rotateUb2DfEdge3' k es i = if   ep /= (ubi+i)
           ubi = fromEnum UB
 
 getUr2Df :: CubieCube -> Int
-getUr2Df cc = -1
+getUr2Df cc = 720 * a + b
+    where a = getUr2DfA cc
+          b = getUr2DfB cc
+
+getUr2DfA :: CubieCube -> Int
+getUr2DfA cc = getUr2DfA' 0 $ ep cc
+
+getUr2DfA' :: Int -> [Edge] -> Int
+getUr2DfA' _ []     = 0
+getUr2DfA' x (e:es) = e' + getUr2DfA' x' es
+    where (e',x')   = if   ei <= dfi
+                      then (ch, (x+1))
+                      else (0, x)
+          ch        = i `choose` (x+1)
+          i         = 11 - length es
+          ei        = fromEnum e
+          dfi       = fromEnum DF
+
+getUr2DfB :: CubieCube -> Int
+getUr2DfB cc = getUr2DfB' (getUr2DfEdge6 cc) 5 0
+
+getUr2DfB' :: [Edge] -> Int -> Int -> Int
+getUr2DfB' _  0 b = b
+getUr2DfB' es i b = getUr2DfB' es' i' b'
+    where (es',k) = rotateUr2DfEdge6 es i
+          i'      = (i-1)
+          b'      = (i+1) * b + k
+
+getUr2DfEdge6 :: CubieCube -> [Edge]
+getUr2DfEdge6 cc = getUr2DfEdge6' $ ep cc
+
+getUr2DfEdge6' :: [Edge] -> [Edge]
+getUr2DfEdge6' []     = []
+getUr2DfEdge6' (e:es) = e' ++ getUr2DfEdge6' es
+    where e'  = if   ei <= dfi
+                then [e]
+                else []
+          ei  = fromEnum e
+          dfi = fromEnum DF
+
+rotateUr2DfEdge6 :: [Edge] -> Int -> ([Edge], Int)
+rotateUr2DfEdge6 es i = rotateUr2DfEdge6' 0 es i
+
+rotateUr2DfEdge6' :: Int -> [Edge] -> Int -> ([Edge], Int)
+rotateUr2DfEdge6' k es i = if   ep /= i
+                           then rotateUr2DfEdge6' k' es' i
+                           else (es,k)
+    where ep  = fromEnum $ es !! i
+          k'  = k+1
+          es' = rotateLeft 0 i es
 
 choose :: Int -> Int -> Int
 choose n k
