@@ -46,7 +46,7 @@ getFr2BrA cc = getFr2BrA' 0 $ reverse $ ep cc
 getFr2BrA' :: Int -> [Edge] -> Int
 getFr2BrA' _ []     = 0
 getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
-    where (e',x')   = if fri <= ei && ei <= bri
+    where (e',x')   = if   fri <= ei && ei <= bri
                       then (ch, (x+1))
                       else (0, x)
           ch        = (11-i) `choose` (x+1)
@@ -71,7 +71,7 @@ getFr2BrEdge4 cc = reverse $ getFr2BrEdge4' $ reverse $ ep cc
 getFr2BrEdge4' :: [Edge] -> [Edge]
 getFr2BrEdge4' []     = []
 getFr2BrEdge4' (e:es) = e' ++ getFr2BrEdge4' es
-    where e'          = if fri <= ei && ei <= bri
+    where e'          = if   fri <= ei && ei <= bri
                         then [e]
                         else []
           ei          = fromEnum e
@@ -82,7 +82,7 @@ rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4 es i = rotateFr2BrEdge4' 0 es i
 
 rotateFr2BrEdge4' :: Int -> [Edge] -> Int -> ([Edge], Int)
-rotateFr2BrEdge4' k es i = if ep /= i+8
+rotateFr2BrEdge4' k es i = if   ep /= i+8
                            then rotateFr2BrEdge4' k' es' i
                            else (es,k)
     where ep  = fromEnum $ es !! i
@@ -100,7 +100,7 @@ getUrf2DlfA cc = getUrf2DlfA' 0 $ cp cc
 getUrf2DlfA' :: Int -> [Corner] -> Int
 getUrf2DlfA' _ []     = 0
 getUrf2DlfA' x (c:cs) = c' + getUrf2DlfA' x' cs
-    where (c',x')     = if ci <= dlfi
+    where (c',x')     = if   ci <= dlfi
                         then (ch, (x+1))
                         else (0,x)
           ch          = i `choose` (x+1)
@@ -124,7 +124,7 @@ getUrf2DlfCorner6 cc = getUrf2DlfCorner6' $ cp cc
 getUrf2DlfCorner6' :: [Corner] -> [Corner]
 getUrf2DlfCorner6' []     = []
 getUrf2DlfCorner6' (c:cs) = c' ++ getUrf2DlfCorner6' cs
-    where c'       = if ci <= dlfi
+    where c'       = if   ci <= dlfi
                      then [c]
                      else []
           ci       = fromEnum c
@@ -134,7 +134,7 @@ rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
 rotateUrf2DlfCorner6 cs i = rotateUrf2DlfCorner6' 0 cs i
 
 rotateUrf2DlfCorner6' :: Int -> [Corner] -> Int -> ([Corner], Int)
-rotateUrf2DlfCorner6' k cs i = if cp /= i
+rotateUrf2DlfCorner6' k cs i = if   cp /= i
                                then rotateUrf2DlfCorner6' k' cs' i
                                else (cs,k)
     where cp  = fromEnum $ cs !! i
@@ -152,7 +152,7 @@ getUr2UlA cc = getUr2UlA' 0 $ ep cc
 getUr2UlA' :: Int -> [Edge] -> Int
 getUr2UlA' _ []     = 0
 getUr2UlA' x (e:es) = e' + getUr2UlA' x' es
-    where (e',x')   = if ei <= uli
+    where (e',x')   = if   ei <= uli
                       then (ch, (x+1))
                       else (0, x)
           ch        = i `choose` (x+1)
@@ -176,7 +176,7 @@ getUr2UlEdge3 cc = getUr2UlEdge3' $ ep cc
 getUr2UlEdge3' :: [Edge] -> [Edge]
 getUr2UlEdge3' []     = []
 getUr2UlEdge3' (e:es) = e' ++ getUr2UlEdge3' es
-    where e'  = if ei <= uli
+    where e'  = if   ei <= uli
                 then [e]
                 else []
           ei  = fromEnum e
@@ -186,7 +186,7 @@ rotateUr2UlEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2UlEdge3 es i = rotateUr2UlEdge3' 0 es i
 
 rotateUr2UlEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
-rotateUr2UlEdge3' k es i = if ep /= i
+rotateUr2UlEdge3' k es i = if   ep /= i
                            then rotateUr2UlEdge3' k' es' i
                            else (es,k)
     where ep  = fromEnum $ es !! i
@@ -204,7 +204,7 @@ getUb2DfA cc = getUb2DfA' 0 $ ep cc
 getUb2DfA' :: Int -> [Edge] -> Int
 getUb2DfA' _ []     = 0
 getUb2DfA' x (e:es) = e' + getUb2DfA' x' es
-    where (e',x')   = if ubi <= ei && ei <= dfi
+    where (e',x')   = if   ubi <= ei && ei <= dfi
                       then (ch, (x+1))
                       else (0, x)
           ch        = i `choose` (x+1)
@@ -229,7 +229,7 @@ getUb2DfEdge3 cc = getUb2DfEdge3' $ ep cc
 getUb2DfEdge3' :: [Edge] -> [Edge]
 getUb2DfEdge3' []     = []
 getUb2DfEdge3' (e:es) = e' ++ getUb2DfEdge3' es
-    where e'  = if ubi <= ei && ei <= dfi
+    where e'  = if   ubi <= ei && ei <= dfi
                 then [e]
                 else []
           ei  = fromEnum e
@@ -240,7 +240,7 @@ rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3 es i = rotateUb2DfEdge3' 0 es i
 
 rotateUb2DfEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
-rotateUb2DfEdge3' k es i = if ep /= (ubi+i)
+rotateUb2DfEdge3' k es i = if   ep /= (ubi+i)
                            then rotateUb2DfEdge3' k' es' i
                            else (es,k)
     where ep  = fromEnum $ es !! i
