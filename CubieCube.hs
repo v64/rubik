@@ -36,8 +36,8 @@ getParity :: CubieCube -> Int
 getParity cc  = n `mod` 2
     where cp' = cp cc
           ps  = [(cp' !! j, cp' !! i)
-                | i <- reverse [1..7],
-                  j <- reverse [0..i-1]]
+                | i <- [7,6..1],
+                  j <- [i-1,i-2..0]]
           n   = sum $ map (\(a,b) -> if   a > b
                                      then 1
                                      else 0) $ ps
