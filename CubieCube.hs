@@ -37,7 +37,7 @@ getParity cc  = n `mod` 2
     where cp' = cp cc
           ps  = [(cp' !! j, cp' !! i)
                 | i <- reverse [1..7],
-                  j <- reverse [0..(i-1)]]
+                  j <- reverse [0..i-1]]
           n   = sum $ map (\(a,b) -> if   a > b
                                      then 1
                                      else 0) $ ps
@@ -54,8 +54,8 @@ getFr2BrA' :: Int -> [Edge] -> Int
 getFr2BrA' _ []     = 0
 getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
     where (e',x')   = if   FR <= e && e <= BR
-                      then (ch, (x+1))
-                      else (0, x)
+                      then (ch, x+1)
+                      else (0,  x)
           ch        = (11-i) `choose` (x+1)
           i         = length es
 
@@ -66,7 +66,7 @@ getFr2BrB' :: [Edge] -> Int -> Int -> Int
 getFr2BrB' _  0 b = b
 getFr2BrB' es i b = getFr2BrB' es' i' b'
     where (es',k) = rotateFr2BrEdge4 es i
-          i'      = (i-1)
+          i'      = i-1
           b'      = (i+1) * b + k
 
 getFr2BrEdge4 :: CubieCube -> [Edge]
@@ -102,8 +102,8 @@ getUrf2DlfA' :: Int -> [Corner] -> Int
 getUrf2DlfA' _ []     = 0
 getUrf2DlfA' x (c:cs) = c' + getUrf2DlfA' x' cs
     where (c',x')     = if   c <= DLF
-                        then (ch, (x+1))
-                        else (0,x)
+                        then (ch, x+1)
+                        else (0,  x)
           ch          = i `choose` (x+1)
           i           = 7 - length cs
 
@@ -114,7 +114,7 @@ getUrf2DlfB' :: [Corner] -> Int -> Int -> Int
 getUrf2DlfB' _  0 b = b
 getUrf2DlfB' cs i b = getUrf2DlfB' cs' i' b'
     where (cs',k)   = rotateUrf2DlfCorner6 cs i
-          i'        = (i-1)
+          i'        = i-1
           b'        = (i+1) * b + k
 
 getUrf2DlfCorner6 :: CubieCube -> [Corner]
@@ -150,8 +150,8 @@ getUr2UlA' :: Int -> [Edge] -> Int
 getUr2UlA' _ []     = 0
 getUr2UlA' x (e:es) = e' + getUr2UlA' x' es
     where (e',x')   = if   e <= UL
-                      then (ch, (x+1))
-                      else (0, x)
+                      then (ch, x+1)
+                      else (0,  x)
           ch        = i `choose` (x+1)
           i         = 11 - length es
 
@@ -162,7 +162,7 @@ getUr2UlB' :: [Edge] -> Int -> Int -> Int
 getUr2UlB' _  0 b = b
 getUr2UlB' es i b = getUr2UlB' es' i' b'
     where (es',k) = rotateUr2UlEdge3 es i
-          i'      = (i-1)
+          i'      = i-1
           b'      = (i+1) * b + k
 
 getUr2UlEdge3 :: CubieCube -> [Edge]
@@ -198,8 +198,8 @@ getUb2DfA' :: Int -> [Edge] -> Int
 getUb2DfA' _ []     = 0
 getUb2DfA' x (e:es) = e' + getUb2DfA' x' es
     where (e',x')   = if   UB <= e && e <= DF
-                      then (ch, (x+1))
-                      else (0, x)
+                      then (ch, x+1)
+                      else (0,  x)
           ch        = i `choose` (x+1)
           i         = 11 - length es
 
@@ -210,7 +210,7 @@ getUb2DfB' :: [Edge] -> Int -> Int -> Int
 getUb2DfB' _  0 b = b
 getUb2DfB' es i b = getUb2DfB' es' i' b'
     where (es',k) = rotateUb2DfEdge3 es i
-          i'      = (i-1)
+          i'      = i-1
           b'      = (i+1) * b + k
 
 getUb2DfEdge3 :: CubieCube -> [Edge]
@@ -227,7 +227,7 @@ rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3 es i = rotateUb2DfEdge3' 0 es i
 
 rotateUb2DfEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
-rotateUb2DfEdge3' k es i = if   ep /= (ubi+i)
+rotateUb2DfEdge3' k es i = if   ep /= ubi+i
                            then rotateUb2DfEdge3' k' es' i
                            else (es,k)
     where ep  = fromEnum $ es !! i
@@ -247,8 +247,8 @@ getUr2DfA' :: Int -> [Edge] -> Int
 getUr2DfA' _ []     = 0
 getUr2DfA' x (e:es) = e' + getUr2DfA' x' es
     where (e',x')   = if   e <= DF
-                      then (ch, (x+1))
-                      else (0, x)
+                      then (ch, x+1)
+                      else (0,  x)
           ch        = i `choose` (x+1)
           i         = 11 - length es
 
@@ -259,7 +259,7 @@ getUr2DfB' :: [Edge] -> Int -> Int -> Int
 getUr2DfB' _  0 b = b
 getUr2DfB' es i b = getUr2DfB' es' i' b'
     where (es',k) = rotateUr2DfEdge6 es i
-          i'      = (i-1)
+          i'      = i-1
           b'      = (i+1) * b + k
 
 getUr2DfEdge6 :: CubieCube -> [Edge]
