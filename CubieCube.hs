@@ -53,14 +53,11 @@ getFr2BrA cc = getFr2BrA' 0 $ reverse $ ep cc
 getFr2BrA' :: Int -> [Edge] -> Int
 getFr2BrA' _ []     = 0
 getFr2BrA' x (e:es) = e' + getFr2BrA' x' es
-    where (e',x')   = if   fri <= ei && ei <= bri
+    where (e',x')   = if   FR <= e && e <= BR
                       then (ch, (x+1))
                       else (0, x)
           ch        = (11-i) `choose` (x+1)
           i         = length es
-          ei        = fromEnum e
-          fri       = fromEnum FR
-          bri       = fromEnum BR
 
 getFr2BrB :: CubieCube -> Int
 getFr2BrB cc = getFr2BrB' (getFr2BrEdge4 cc) 3 0
@@ -78,12 +75,9 @@ getFr2BrEdge4 cc = reverse $ getFr2BrEdge4' $ reverse $ ep cc
 getFr2BrEdge4' :: [Edge] -> [Edge]
 getFr2BrEdge4' []     = []
 getFr2BrEdge4' (e:es) = e' ++ getFr2BrEdge4' es
-    where e'          = if   fri <= ei && ei <= bri
+    where e'          = if   FR <= e && e <= BR
                         then [e]
                         else []
-          ei          = fromEnum e
-          fri         = fromEnum FR
-          bri         = fromEnum BR
 
 rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4 es i = rotateFr2BrEdge4' 0 es i
@@ -107,13 +101,11 @@ getUrf2DlfA cc = getUrf2DlfA' 0 $ cp cc
 getUrf2DlfA' :: Int -> [Corner] -> Int
 getUrf2DlfA' _ []     = 0
 getUrf2DlfA' x (c:cs) = c' + getUrf2DlfA' x' cs
-    where (c',x')     = if   ci <= dlfi
+    where (c',x')     = if   c <= DLF
                         then (ch, (x+1))
                         else (0,x)
           ch          = i `choose` (x+1)
           i           = 7 - length cs
-          ci          = fromEnum c
-          dlfi        = fromEnum DLF
 
 getUrf2DlfB :: CubieCube -> Int
 getUrf2DlfB cc = getUrf2DlfB' (getUrf2DlfCorner6 cc) 5 0
@@ -131,11 +123,9 @@ getUrf2DlfCorner6 cc = getUrf2DlfCorner6' $ cp cc
 getUrf2DlfCorner6' :: [Corner] -> [Corner]
 getUrf2DlfCorner6' []     = []
 getUrf2DlfCorner6' (c:cs) = c' ++ getUrf2DlfCorner6' cs
-    where c'       = if   ci <= dlfi
+    where c'       = if   c <= DLF
                      then [c]
                      else []
-          ci       = fromEnum c
-          dlfi     = fromEnum DLF
 
 rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
 rotateUrf2DlfCorner6 cs i = rotateUrf2DlfCorner6' 0 cs i
@@ -159,13 +149,11 @@ getUr2UlA cc = getUr2UlA' 0 $ ep cc
 getUr2UlA' :: Int -> [Edge] -> Int
 getUr2UlA' _ []     = 0
 getUr2UlA' x (e:es) = e' + getUr2UlA' x' es
-    where (e',x')   = if   ei <= uli
+    where (e',x')   = if   e <= UL
                       then (ch, (x+1))
                       else (0, x)
           ch        = i `choose` (x+1)
           i         = 11 - length es
-          ei        = fromEnum e
-          uli       = fromEnum UL
 
 getUr2UlB :: CubieCube -> Int
 getUr2UlB cc = getUr2UlB' (getUr2UlEdge3 cc) 2 0
@@ -183,11 +171,9 @@ getUr2UlEdge3 cc = getUr2UlEdge3' $ ep cc
 getUr2UlEdge3' :: [Edge] -> [Edge]
 getUr2UlEdge3' []     = []
 getUr2UlEdge3' (e:es) = e' ++ getUr2UlEdge3' es
-    where e'  = if   ei <= uli
+    where e'  = if   e <= UL
                 then [e]
                 else []
-          ei  = fromEnum e
-          uli = fromEnum UL
 
 rotateUr2UlEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2UlEdge3 es i = rotateUr2UlEdge3' 0 es i
@@ -211,14 +197,11 @@ getUb2DfA cc = getUb2DfA' 0 $ ep cc
 getUb2DfA' :: Int -> [Edge] -> Int
 getUb2DfA' _ []     = 0
 getUb2DfA' x (e:es) = e' + getUb2DfA' x' es
-    where (e',x')   = if   ubi <= ei && ei <= dfi
+    where (e',x')   = if   UB <= e && e <= DF
                       then (ch, (x+1))
                       else (0, x)
           ch        = i `choose` (x+1)
           i         = 11 - length es
-          ei        = fromEnum e
-          ubi       = fromEnum UB
-          dfi       = fromEnum DF
 
 getUb2DfB :: CubieCube -> Int
 getUb2DfB cc = getUb2DfB' (getUb2DfEdge3 cc) 2 0
@@ -236,12 +219,9 @@ getUb2DfEdge3 cc = getUb2DfEdge3' $ ep cc
 getUb2DfEdge3' :: [Edge] -> [Edge]
 getUb2DfEdge3' []     = []
 getUb2DfEdge3' (e:es) = e' ++ getUb2DfEdge3' es
-    where e'  = if   ubi <= ei && ei <= dfi
+    where e'  = if   UB <= e && e <= DF
                 then [e]
                 else []
-          ei  = fromEnum e
-          ubi = fromEnum UB
-          dfi = fromEnum DF
 
 rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3 es i = rotateUb2DfEdge3' 0 es i
@@ -266,13 +246,11 @@ getUr2DfA cc = getUr2DfA' 0 $ ep cc
 getUr2DfA' :: Int -> [Edge] -> Int
 getUr2DfA' _ []     = 0
 getUr2DfA' x (e:es) = e' + getUr2DfA' x' es
-    where (e',x')   = if   ei <= dfi
+    where (e',x')   = if   e <= DF
                       then (ch, (x+1))
                       else (0, x)
           ch        = i `choose` (x+1)
           i         = 11 - length es
-          ei        = fromEnum e
-          dfi       = fromEnum DF
 
 getUr2DfB :: CubieCube -> Int
 getUr2DfB cc = getUr2DfB' (getUr2DfEdge6 cc) 5 0
@@ -290,11 +268,9 @@ getUr2DfEdge6 cc = getUr2DfEdge6' $ ep cc
 getUr2DfEdge6' :: [Edge] -> [Edge]
 getUr2DfEdge6' []     = []
 getUr2DfEdge6' (e:es) = e' ++ getUr2DfEdge6' es
-    where e'  = if   ei <= dfi
+    where e'  = if   e <= DF
                 then [e]
                 else []
-          ei  = fromEnum e
-          dfi = fromEnum DF
 
 rotateUr2DfEdge6 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2DfEdge6 es i = rotateUr2DfEdge6' 0 es i
