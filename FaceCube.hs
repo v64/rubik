@@ -87,8 +87,7 @@ cpAndCo fc = unzip [(j,ori)
 
 cColors :: [Color] -> Corner -> (Color, Color, Int)
 cColors fs c   = (col1, col2, ori)
-    where i    = fromEnum c
-          cfi  = cornerFacelet !! i
+    where cfi  = cornerFacelet !! fromEnum c
           ori  = head [o | o <- [0..2],
                            fs !! (fromEnum $ cfi !! o) == U ||
                            fs !! (fromEnum $ cfi !! o) == D]
