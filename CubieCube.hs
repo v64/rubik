@@ -78,7 +78,9 @@ rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4 es i = rotateFr2BrEdge4' 0 es i
 
 rotateFr2BrEdge4' :: Int -> [Edge] -> Int -> ([Edge], Int)
-rotateFr2BrEdge4' k es i = if ep /= i+8 then rotateFr2BrEdge4' k' es' i else (es,k)
+rotateFr2BrEdge4' k es i = if ep /= i+8
+                           then rotateFr2BrEdge4' k' es' i
+                           else (es,k)
     where ep  = fromEnum $ es !! i
           k'  = k+1
           es' = rotateLeft 0 i es
