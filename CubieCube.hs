@@ -33,7 +33,14 @@ getEflip :: CubieCube -> Int
 getEflip  cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 
 getParity :: CubieCube -> Int
-getParity cc = -1
+getParity cc  = n `mod` 2
+    where cp' = cp cc
+          ps  = concat [[(cp' !! j, cp' !! i)
+                        | j <- reverse [0..(i-1)]]
+                        | i <- reverse [1..7]]
+          n   = sum $ map (\(a,b) -> if   a > b
+                                     then 1
+                                     else 0) $ ps
 
 getFr2Br :: CubieCube -> Int
 getFr2Br cc = 24 * a + b
