@@ -35,9 +35,10 @@ getEflip  cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
 getParity :: CubieCube -> Int
 getParity cc  = n `mod` 2
     where cp' = cp cc
-          ps  = [(cp' !! j, cp' !! i)
+          ps  = [ (cp' !! j, cp' !! i)
                 | i <- [7,6..1],
-                  j <- [i-1,i-2..0]]
+                  j <- [i-1,i-2..0]
+                ]
           n   = sum $ map (\(a,b) ->
                           if   a > b
                           then 1
@@ -293,7 +294,11 @@ choose n k
                   (chooseIndex !! (n-1) !! k)
 
 chooseIndex :: [[Int]]
-chooseIndex = [[choose n k | k <- [0..]] | n <- [0..]]
+chooseIndex = [ [ choose n k
+                | k <- [0..]
+                ]
+              | n <- [0..]
+              ]
 
 slice :: Int -> Int -> [a] -> [a]
 slice a b xs = take (b-a+1) . drop a $ xs
