@@ -78,25 +78,25 @@ toCubieCube fc = CubieCube {
           (ep',eo') = epAndEo fc
 
 cpAndCo :: FaceCube -> ([Corner], [Int])
-cpAndCo fc = unzip [ (j,ori)
-                   | (col1, col2, ori) <- [ cColors (cols fc) c
-                                          | c <- [URF ..]
-                                          ],
-                     j <- [URF ..],
-                     col1 == cornerColor !! (fromEnum j) !! 1 &&
-                     col2 == cornerColor !! (fromEnum j) !! 2
+cpAndCo fc = unzip [ (cp,co)
+                   | (cc1,cc2,co) <- [ cColors (cols fc) cs
+                                     | cs <- [URF ..]
+                                     ],
+                     cp           <- [URF ..],
+                     cc1 == cornerColor !! (fromEnum cp) !! 1 &&
+                     cc2 == cornerColor !! (fromEnum cp) !! 2
                    ]
 
 cColors :: [Color] -> Corner -> (Color, Color, Int)
-cColors fs c   = (col1, col2, ori)
+cColors fs c   = (cc1,cc2,co)
     where cfi  = cornerFacelet !! fromEnum c
-          ori  = head [ o
+          co   = head [ o
                       | o <- [0..2],
                         fs !! (fromEnum $ cfi !! o) == U ||
                         fs !! (fromEnum $ cfi !! o) == D
                       ]
-          col1 = fs !! (fromEnum $ cfi !! ((ori+1) `mod` 3))
-          col2 = fs !! (fromEnum $ cfi !! ((ori+2) `mod` 3))
+          cc1  = fs !! (fromEnum $ cfi !! ((co+1) `mod` 3))
+          cc2  = fs !! (fromEnum $ cfi !! ((co+2) `mod` 3))
 
 epAndEo :: FaceCube -> ([Edge], [Int])
 epAndEo fc = unzip [ (ep,eo)
