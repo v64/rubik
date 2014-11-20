@@ -1,5 +1,6 @@
 module CoordCube (
-    CoordCube (..)
+    CoordCube (..),
+    parityMove
 ) where
 
 data CoordCube = CoordCube {
@@ -12,3 +13,7 @@ data CoordCube = CoordCube {
     ub2df   :: Int,
     ur2df   :: Int
 } deriving (Eq, Show)
+
+parityMove :: [[Int]]
+parityMove = [[1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+              [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0]]
