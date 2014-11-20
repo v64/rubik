@@ -1,5 +1,6 @@
 module CubieCube (
     CubieCube (..),
+    idCubieCube,
     toCoordCube,
     edgeMultiply,
     getFr2Br,
@@ -16,6 +17,14 @@ data CubieCube = CubieCube {
     ep :: [Edge],
     eo :: [Int]
 } deriving (Eq, Show)
+
+idCubieCube :: CubieCube
+idCubieCube = CubieCube {
+    cp = [URF, UFL, ULB, UBR, DFR, DLF, DBL, DRB],
+    co = [0, 0, 0, 0, 0, 0, 0, 0],
+    ep = [UR, UF, UL, UB, DR, DF, DL, DB, FR, FL, BL, BR],
+    eo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
 
 rawCubieCube :: [Corner] -> [Int] -> [Edge] -> [Int] -> CubieCube
 rawCubieCube cp' co' ep' eo' = CubieCube {
