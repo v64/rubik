@@ -1,6 +1,7 @@
 module CubieCube (
     CubieCube (..),
-    toCoordCube
+    toCoordCube,
+    edgeMultiply
 ) where
 
 import CoordCube
@@ -319,3 +320,25 @@ rotateLeft  = rotate (\xs -> tail xs ++ [head xs])
 
 rotateRight :: Int -> Int -> [a] -> [a]
 rotateRight = rotate (\xs -> last xs : init xs)
+
+edgeMultiply :: CubieCube -> CubieCube -> CubieCube
+edgeMultiply a b = a {
+    ep = ePerm a b,
+    eo = eOri  a b
+}
+
+ePerm :: CubieCube -> CubieCube -> [Edge]
+ePerm a b = [ epa !! fromEnum (epb !! ei)
+            | ei <- map fromEnum [UR ..]
+            ]
+    where epa = ep a
+          epb = ep b
+
+eOri :: CubieCube -> CubieCube -> [Int]
+eOri  a b = [ ((eob !! ei) + (eoa !! fromEnum (epb !! ei)))
+              `mod` 2
+            | ei <- map fromEnum [UR ..]
+            ]
+    where epb = ep b
+          eoa = eo a
+          eob = eo b
