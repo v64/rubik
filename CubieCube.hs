@@ -2,7 +2,8 @@ module CubieCube (
     CubieCube (..),
     toCoordCube,
     edgeMultiply,
-    getFr2Br
+    getFr2Br,
+    moveCube
 ) where
 
 import CoordCube
@@ -15,6 +16,47 @@ data CubieCube = CubieCube {
     ep :: [Edge],
     eo :: [Int]
 } deriving (Eq, Show)
+
+rawCubieCube :: [Corner] -> [Int] -> [Edge] -> [Int] -> CubieCube
+rawCubieCube cp' co' ep' eo' = CubieCube {
+    cp = cp',
+    co = co',
+    ep = ep',
+    eo = eo'
+}
+
+moveCube :: [CubieCube]
+moveCube = [cc0,cc1,cc2,cc3,cc4,cc5]
+    where cc0 = rawCubieCube cpU coU epU eoU
+          cc1 = rawCubieCube cpR coR epR eoR
+          cc2 = rawCubieCube cpF coF epF eoF
+          cc3 = rawCubieCube cpD coD epD eoD
+          cc4 = rawCubieCube cpL coL epL eoL
+          cc5 = rawCubieCube cpB coB epB eoB
+          cpU = [UBR, URF, UFL, ULB, DFR, DLF, DBL, DRB]
+          coU = [0, 0, 0, 0, 0, 0, 0, 0]
+          epU = [UB, UR, UF, UL, DR, DF, DL, DB, FR, FL, BL, BR]
+          eoU = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          cpR = [DFR, UFL, ULB, URF, DRB, DLF, DBL, UBR]
+          coR = [2, 0, 0, 1, 1, 0, 0, 2]
+          epR = [FR, UF, UL, UB, BR, DF, DL, DB, DR, FL, BL, UR]
+          eoR = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          cpF = [UFL, DLF, ULB, UBR, URF, DFR, DBL, DRB]
+          coF = [1, 2, 0, 0, 2, 1, 0, 0]
+          epF = [UR, FL, UL, UB, DR, FR, DL, DB, UF, DF, BL, BR]
+          eoF = [0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0]
+          cpD = [URF, UFL, ULB, UBR, DLF, DBL, DRB, DFR]
+          coD = [0, 0, 0, 0, 0, 0, 0, 0]
+          epD = [UR, UF, UL, UB, DF, DL, DB, DR, FR, FL, BL, BR ]
+          eoD = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          cpL = [URF, ULB, DBL, UBR, DFR, UFL, DLF, DRB]
+          coL = [0, 1, 2, 0, 0, 2, 1, 0]
+          epL = [UR, UF, BL, UB, DR, DF, FL, DB, FR, UL, DL, BR]
+          eoL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          cpB = [URF, UFL, UBR, DRB, DFR, DLF, ULB, DBL]
+          coB = [0, 0, 1, 2, 0, 0, 2, 1]
+          epB = [UR, UF, UL, BR, DR, DF, DL, BL, FR, FL, UB, DB]
+          eoB = [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1]
 
 toCoordCube :: CubieCube -> CoordCube
 toCoordCube cc = CoordCube {
