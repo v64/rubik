@@ -1,7 +1,8 @@
 module CubieCube (
     CubieCube (..),
     toCoordCube,
-    edgeMultiply
+    edgeMultiply,
+    getFr2Br
 ) where
 
 import CoordCube
