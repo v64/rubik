@@ -368,7 +368,7 @@ rotate f a b xs = (take a xs) ++
                   (f $ slice a b xs) ++
                   (takeR (length xs - b - 1) xs)
 
-rotateLeft :: Int -> Int -> [a] -> [a]
+rotateLeft  :: Int -> Int -> [a] -> [a]
 rotateLeft  = rotate (\xs -> tail xs ++ [head xs])
 
 rotateRight :: Int -> Int -> [a] -> [a]
