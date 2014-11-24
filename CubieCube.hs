@@ -84,7 +84,7 @@ getCtwist :: CubieCube -> Int
 getCtwist cc = foldl' (\n x -> 3 * n + x) 0 $ init $ co cc
 
 getEflip :: CubieCube -> Int
-getEflip  cc = foldl' (\n x -> 2 * n + x) 0 $ init $ eo cc
+getEflip cc = foldl' (\n x -> 2 * n + x) 0 $ init $ eo cc
 
 getParity :: CubieCube -> Int
 getParity cc  = n `mod` 2
