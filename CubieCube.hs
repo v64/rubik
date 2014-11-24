@@ -387,7 +387,7 @@ ePerm a b = [ epa !! fromEnum (epb !! ei)
     where epa = ep a
           epb = ep b
 
-eOri :: CubieCube -> CubieCube -> [Int]
+eOri  :: CubieCube -> CubieCube -> [Int]
 eOri  a b = [ ((eob !! ei) + (eoa !! fromEnum (epb !! ei)))
               `mod` 2
             | ei <- map fromEnum [UR ..]
