@@ -9,6 +9,7 @@ module CubieCube (
 
 import CoordCube
 import Corner
+import Data.List (foldl')
 import Edge
 
 data CubieCube = CubieCube {
@@ -80,10 +81,10 @@ toCoordCube cc = CoordCube {
 }
 
 getCtwist :: CubieCube -> Int
-getCtwist cc = foldl (\n x -> 3 * n + x) 0 $ init $ co cc
+getCtwist cc = foldl' (\n x -> 3 * n + x) 0 $ init $ co cc
 
 getEflip :: CubieCube -> Int
-getEflip  cc = foldl (\n x -> 2 * n + x) 0 $ init $ eo cc
+getEflip  cc = foldl' (\n x -> 2 * n + x) 0 $ init $ eo cc
 
 getParity :: CubieCube -> Int
 getParity cc  = n `mod` 2
@@ -92,10 +93,10 @@ getParity cc  = n `mod` 2
                 | i <- [7,6..1],
                   j <- [i-1,i-2..0]
                 ]
-          n   = foldl (\k (a,b) ->
-                       if   a > b
-                       then k+1
-                       else k)
+          n   = foldl' (\k (a,b) ->
+                        if   a > b
+                        then k+1
+                        else k)
                 0 ps
 
 getFr2Br :: CubieCube -> Int
