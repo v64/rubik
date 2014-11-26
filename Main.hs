@@ -9,6 +9,9 @@ main = do
     -- let facelets = "UFBUUBFRBLDUURRDUUDDDLFBBBRULFDDLBDLRFLRLFRFLRRFBBUFLD"
     -- let facelets = "BLFBULURDLDDFRLURRBFFUFDRULBBFBDUDDUUDRBLFLRDRULFBLFRB"
 
+    -- let c = (toCoordCube . toCubieCube . toFaceCube) facelets
+    -- putStrLn $ show c
+
     let fc = toFaceCube facelets
     putStrLn $ show fc
     let cc = toCubieCube fc
