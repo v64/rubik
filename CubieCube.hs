@@ -180,9 +180,7 @@ getUrf2DlfCorner6 cc = getUrf2DlfCorner6' $ cp cc
 getUrf2DlfCorner6' :: [Corner] -> [Corner]
 getUrf2DlfCorner6' []     = []
 getUrf2DlfCorner6' (c:cs) = c' ++ getUrf2DlfCorner6' cs
-    where c'       = if   c <= DLF
-                     then [c]
-                     else []
+    where c' = if c <= DLF then [c] else []
 
 rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
 rotateUrf2DlfCorner6 = rotateUrf2DlfCorner6' 0
@@ -228,9 +226,7 @@ getUr2UlEdge3 cc = getUr2UlEdge3' $ ep cc
 getUr2UlEdge3' :: [Edge] -> [Edge]
 getUr2UlEdge3' []     = []
 getUr2UlEdge3' (e:es) = e' ++ getUr2UlEdge3' es
-    where e'  = if   e <= UL
-                then [e]
-                else []
+    where e' = if e <= UL then [e] else []
 
 rotateUr2UlEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2UlEdge3 = rotateUr2UlEdge3' 0
@@ -276,9 +272,7 @@ getUb2DfEdge3 cc = getUb2DfEdge3' $ ep cc
 getUb2DfEdge3' :: [Edge] -> [Edge]
 getUb2DfEdge3' []     = []
 getUb2DfEdge3' (e:es) = e' ++ getUb2DfEdge3' es
-    where e'  = if   UB <= e && e <= DF
-                then [e]
-                else []
+    where e' = if UB <= e && e <= DF then [e] else []
 
 rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3 = rotateUb2DfEdge3' 0
@@ -325,9 +319,7 @@ getUr2DfEdge6 cc = getUr2DfEdge6' $ ep cc
 getUr2DfEdge6' :: [Edge] -> [Edge]
 getUr2DfEdge6' []     = []
 getUr2DfEdge6' (e:es) = e' ++ getUr2DfEdge6' es
-    where e'  = if   e <= DF
-                then [e]
-                else []
+    where e' = if e <= DF then [e] else []
 
 rotateUr2DfEdge6 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2DfEdge6 = rotateUr2DfEdge6' 0
