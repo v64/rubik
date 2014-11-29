@@ -132,9 +132,7 @@ getFr2BrEdge4 cc = reverse $ getFr2BrEdge4' $ reverse $ ep cc
 getFr2BrEdge4' :: [Edge] -> [Edge]
 getFr2BrEdge4' []     = []
 getFr2BrEdge4' (e:es) = e' ++ getFr2BrEdge4' es
-    where e'          = if   FR <= e && e <= BR
-                        then [e]
-                        else []
+    where e' = if FR <= e && e <= BR then [e] else []
 
 rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4 = rotateFr2BrEdge4' 0
