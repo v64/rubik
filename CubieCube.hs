@@ -137,7 +137,7 @@ getFr2BrEdge4' (e:es) = e' ++ getFr2BrEdge4' es
                         else []
 
 rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
-rotateFr2BrEdge4 es i = rotateFr2BrEdge4' 0 es i
+rotateFr2BrEdge4 = rotateFr2BrEdge4' 0
 
 rotateFr2BrEdge4' :: Int -> [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4' k es i = if   ep /= i+8
@@ -185,7 +185,7 @@ getUrf2DlfCorner6' (c:cs) = c' ++ getUrf2DlfCorner6' cs
                      else []
 
 rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
-rotateUrf2DlfCorner6 cs i = rotateUrf2DlfCorner6' 0 cs i
+rotateUrf2DlfCorner6 = rotateUrf2DlfCorner6' 0
 
 rotateUrf2DlfCorner6' :: Int -> [Corner] -> Int -> ([Corner], Int)
 rotateUrf2DlfCorner6' k cs i = if   cp /= i
@@ -233,7 +233,7 @@ getUr2UlEdge3' (e:es) = e' ++ getUr2UlEdge3' es
                 else []
 
 rotateUr2UlEdge3 :: [Edge] -> Int -> ([Edge], Int)
-rotateUr2UlEdge3 es i = rotateUr2UlEdge3' 0 es i
+rotateUr2UlEdge3 = rotateUr2UlEdge3' 0
 
 rotateUr2UlEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
 rotateUr2UlEdge3' k es i = if   ep /= i
@@ -281,7 +281,7 @@ getUb2DfEdge3' (e:es) = e' ++ getUb2DfEdge3' es
                 else []
 
 rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
-rotateUb2DfEdge3 es i = rotateUb2DfEdge3' 0 es i
+rotateUb2DfEdge3 = rotateUb2DfEdge3' 0
 
 rotateUb2DfEdge3' :: Int -> [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3' k es i = if   ep /= ubi+i
@@ -330,7 +330,7 @@ getUr2DfEdge6' (e:es) = e' ++ getUr2DfEdge6' es
                 else []
 
 rotateUr2DfEdge6 :: [Edge] -> Int -> ([Edge], Int)
-rotateUr2DfEdge6 es i = rotateUr2DfEdge6' 0 es i
+rotateUr2DfEdge6 = rotateUr2DfEdge6' 0
 
 rotateUr2DfEdge6' :: Int -> [Edge] -> Int -> ([Edge], Int)
 rotateUr2DfEdge6' k es i = if   ep /= i
@@ -364,9 +364,9 @@ takeR n l = go (drop n l) l
           go (_:xs) (_:ys) = go xs ys
 
 rotate :: ([a] -> [a]) -> Int -> Int -> [a] -> [a]
-rotate f a b xs = (take a xs) ++
-                  (f $ slice a b xs) ++
-                  (takeR (length xs - b - 1) xs)
+rotate f a b xs = take a xs ++
+                  f (slice a b xs) ++
+                  takeR (length xs - b - 1) xs
 
 rotateLeft :: Int -> Int -> [a] -> [a]
 rotateLeft = rotate (\xs -> tail xs ++ [head xs])

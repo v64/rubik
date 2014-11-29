@@ -83,8 +83,8 @@ cpAndCo fc = unzip [ (cp,co)
                                      | cs <- [URF ..]
                                      ],
                      cp           <- [URF ..],
-                     cc1 == cornerColor !! (fromEnum cp) !! 1 &&
-                     cc2 == cornerColor !! (fromEnum cp) !! 2
+                     cc1 == cornerColor !! fromEnum cp !! 1 &&
+                     cc2 == cornerColor !! fromEnum cp !! 2
                    ]
 
 cColors :: [Color] -> Corner -> (Color, Color, Int)
@@ -92,11 +92,11 @@ cColors fs c   = (cc1,cc2,co)
     where cfi  = cornerFacelet !! fromEnum c
           co   = head [ o
                       | o <- [0..2],
-                        fs !! (fromEnum $ cfi !! o) == U ||
-                        fs !! (fromEnum $ cfi !! o) == D
+                        fs !! fromEnum (cfi !! o) == U ||
+                        fs !! fromEnum (cfi !! o) == D
                       ]
-          cc1  = fs !! (fromEnum $ cfi !! ((co+1) `mod` 3))
-          cc2  = fs !! (fromEnum $ cfi !! ((co+2) `mod` 3))
+          cc1  = fs !! fromEnum (cfi !! ((co+1) `mod` 3))
+          cc2  = fs !! fromEnum (cfi !! ((co+2) `mod` 3))
 
 epAndEo :: FaceCube -> ([Edge], [Int])
 epAndEo fc = unzip [ (ep,eo)
