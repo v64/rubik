@@ -121,7 +121,7 @@ getFr2BrB' es i b = getFr2BrB' es' i' b'
           b'      = (i+1) * b + k
 
 getFr2BrEdge4 :: CubieCube -> [Edge]
-getFr2BrEdge4 cc = reverse $ getFr2BrEdge4' $ reverse $ ep cc
+getFr2BrEdge4 cc = getFr2BrEdge4' $ ep cc
 
 getFr2BrEdge4' :: [Edge] -> [Edge]
 getFr2BrEdge4' = filter (\e -> FR <= e && e <= BR)
