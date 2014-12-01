@@ -124,9 +124,7 @@ getFr2BrEdge4 :: CubieCube -> [Edge]
 getFr2BrEdge4 cc = reverse $ getFr2BrEdge4' $ reverse $ ep cc
 
 getFr2BrEdge4' :: [Edge] -> [Edge]
-getFr2BrEdge4' []     = []
-getFr2BrEdge4' (e:es) = e' ++ getFr2BrEdge4' es
-    where e' = if FR <= e && e <= BR then [e] else []
+getFr2BrEdge4' = filter (\e -> FR <= e && e <= BR)
 
 rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4 = rotateFr2BrEdge4' 0
@@ -164,9 +162,7 @@ getUrf2DlfCorner6 :: CubieCube -> [Corner]
 getUrf2DlfCorner6 cc = getUrf2DlfCorner6' $ cp cc
 
 getUrf2DlfCorner6' :: [Corner] -> [Corner]
-getUrf2DlfCorner6' []     = []
-getUrf2DlfCorner6' (c:cs) = c' ++ getUrf2DlfCorner6' cs
-    where c' = if c <= DLF then [c] else []
+getUrf2DlfCorner6' = filter (\c -> c <= DLF)
 
 rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
 rotateUrf2DlfCorner6 = rotateUrf2DlfCorner6' 0
@@ -204,9 +200,7 @@ getUr2UlEdge3 :: CubieCube -> [Edge]
 getUr2UlEdge3 cc = getUr2UlEdge3' $ ep cc
 
 getUr2UlEdge3' :: [Edge] -> [Edge]
-getUr2UlEdge3' []     = []
-getUr2UlEdge3' (e:es) = e' ++ getUr2UlEdge3' es
-    where e' = if e <= UL then [e] else []
+getUr2UlEdge3' = filter (\e -> e <= UL)
 
 rotateUr2UlEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2UlEdge3 = rotateUr2UlEdge3' 0
@@ -244,9 +238,7 @@ getUb2DfEdge3 :: CubieCube -> [Edge]
 getUb2DfEdge3 cc = getUb2DfEdge3' $ ep cc
 
 getUb2DfEdge3' :: [Edge] -> [Edge]
-getUb2DfEdge3' []     = []
-getUb2DfEdge3' (e:es) = e' ++ getUb2DfEdge3' es
-    where e' = if UB <= e && e <= DF then [e] else []
+getUb2DfEdge3' = filter (\e -> UB <= e && e <= DF)
 
 rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3 = rotateUb2DfEdge3' 0
@@ -285,9 +277,7 @@ getUr2DfEdge6 :: CubieCube -> [Edge]
 getUr2DfEdge6 cc = getUr2DfEdge6' $ ep cc
 
 getUr2DfEdge6' :: [Edge] -> [Edge]
-getUr2DfEdge6' []     = []
-getUr2DfEdge6' (e:es) = e' ++ getUr2DfEdge6' es
-    where e' = if e <= DF then [e] else []
+getUr2DfEdge6' = filter (\e -> e <= DF)
 
 rotateUr2DfEdge6 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2DfEdge6 = rotateUr2DfEdge6' 0
