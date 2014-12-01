@@ -111,7 +111,8 @@ getFr2BrA' :: Int -> [Edge] -> Int
 getFr2BrA' = getA (\e -> FR <= e && e <= BR) 11 0
 
 getFr2BrB :: CubieCube -> Int
-getFr2BrB cc = getFr2BrB' (getFr2BrEdge4 cc) 3 0
+getFr2BrB cc = getFr2BrB' es 3 0
+    where es = filter (\e -> FR <= e && e <= BR) $ ep cc
 
 getFr2BrB' :: [Edge] -> Int -> Int -> Int
 getFr2BrB' _  0 b = b
@@ -119,12 +120,6 @@ getFr2BrB' es i b = getFr2BrB' es' i' b'
     where (es',k) = rotateFr2BrEdge4 es i
           i'      = i-1
           b'      = (i+1) * b + k
-
-getFr2BrEdge4 :: CubieCube -> [Edge]
-getFr2BrEdge4 cc = getFr2BrEdge4' $ ep cc
-
-getFr2BrEdge4' :: [Edge] -> [Edge]
-getFr2BrEdge4' = filter (\e -> FR <= e && e <= BR)
 
 rotateFr2BrEdge4 :: [Edge] -> Int -> ([Edge], Int)
 rotateFr2BrEdge4 = rotateFr2BrEdge4' 0
@@ -149,7 +144,8 @@ getUrf2DlfA' :: Int -> [Corner] -> Int
 getUrf2DlfA' = getA (\c -> c <= DLF) 0 7
 
 getUrf2DlfB :: CubieCube -> Int
-getUrf2DlfB cc = getUrf2DlfB' (getUrf2DlfCorner6 cc) 5 0
+getUrf2DlfB cc = getUrf2DlfB' cs 5 0
+    where   cs = filter (\c -> c <= DLF) $ cp cc
 
 getUrf2DlfB' :: [Corner] -> Int -> Int -> Int
 getUrf2DlfB' _  0 b = b
@@ -157,12 +153,6 @@ getUrf2DlfB' cs i b = getUrf2DlfB' cs' i' b'
     where (cs',k)   = rotateUrf2DlfCorner6 cs i
           i'        = i-1
           b'        = (i+1) * b + k
-
-getUrf2DlfCorner6 :: CubieCube -> [Corner]
-getUrf2DlfCorner6 cc = getUrf2DlfCorner6' $ cp cc
-
-getUrf2DlfCorner6' :: [Corner] -> [Corner]
-getUrf2DlfCorner6' = filter (\c -> c <= DLF)
 
 rotateUrf2DlfCorner6 :: [Corner] -> Int -> ([Corner], Int)
 rotateUrf2DlfCorner6 = rotateUrf2DlfCorner6' 0
@@ -187,7 +177,8 @@ getUr2UlA' :: Int -> [Edge] -> Int
 getUr2UlA' = getA (\e -> e <= UL) 0 11
 
 getUr2UlB :: CubieCube -> Int
-getUr2UlB cc = getUr2UlB' (getUr2UlEdge3 cc) 2 0
+getUr2UlB cc = getUr2UlB' es 2 0
+    where es = filter (\e -> e <= UL) $ ep cc
 
 getUr2UlB' :: [Edge] -> Int -> Int -> Int
 getUr2UlB' _  0 b = b
@@ -195,12 +186,6 @@ getUr2UlB' es i b = getUr2UlB' es' i' b'
     where (es',k) = rotateUr2UlEdge3 es i
           i'      = i-1
           b'      = (i+1) * b + k
-
-getUr2UlEdge3 :: CubieCube -> [Edge]
-getUr2UlEdge3 cc = getUr2UlEdge3' $ ep cc
-
-getUr2UlEdge3' :: [Edge] -> [Edge]
-getUr2UlEdge3' = filter (\e -> e <= UL)
 
 rotateUr2UlEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2UlEdge3 = rotateUr2UlEdge3' 0
@@ -225,7 +210,8 @@ getUb2DfA' :: Int -> [Edge] -> Int
 getUb2DfA' = getA (\e -> UB <= e && e <= DF) 0 11
 
 getUb2DfB :: CubieCube -> Int
-getUb2DfB cc = getUb2DfB' (getUb2DfEdge3 cc) 2 0
+getUb2DfB cc = getUb2DfB' es 2 0
+    where es = filter (\e -> UB <= e && e <= DF) $ ep cc
 
 getUb2DfB' :: [Edge] -> Int -> Int -> Int
 getUb2DfB' _  0 b = b
@@ -233,12 +219,6 @@ getUb2DfB' es i b = getUb2DfB' es' i' b'
     where (es',k) = rotateUb2DfEdge3 es i
           i'      = i-1
           b'      = (i+1) * b + k
-
-getUb2DfEdge3 :: CubieCube -> [Edge]
-getUb2DfEdge3 cc = getUb2DfEdge3' $ ep cc
-
-getUb2DfEdge3' :: [Edge] -> [Edge]
-getUb2DfEdge3' = filter (\e -> UB <= e && e <= DF)
 
 rotateUb2DfEdge3 :: [Edge] -> Int -> ([Edge], Int)
 rotateUb2DfEdge3 = rotateUb2DfEdge3' 0
@@ -264,7 +244,8 @@ getUr2DfA' :: Int -> [Edge] -> Int
 getUr2DfA' = getA (\e -> e <= DF) 0 11
 
 getUr2DfB :: CubieCube -> Int
-getUr2DfB cc = getUr2DfB' (getUr2DfEdge6 cc) 5 0
+getUr2DfB cc = getUr2DfB' es 5 0
+    where es = filter (\e -> e <= DF) $ ep cc
 
 getUr2DfB' :: [Edge] -> Int -> Int -> Int
 getUr2DfB' _  0 b = b
@@ -272,12 +253,6 @@ getUr2DfB' es i b = getUr2DfB' es' i' b'
     where (es',k) = rotateUr2DfEdge6 es i
           i'      = i-1
           b'      = (i+1) * b + k
-
-getUr2DfEdge6 :: CubieCube -> [Edge]
-getUr2DfEdge6 cc = getUr2DfEdge6' $ ep cc
-
-getUr2DfEdge6' :: [Edge] -> [Edge]
-getUr2DfEdge6' = filter (\e -> e <= DF)
 
 rotateUr2DfEdge6 :: [Edge] -> Int -> ([Edge], Int)
 rotateUr2DfEdge6 = rotateUr2DfEdge6' 0
