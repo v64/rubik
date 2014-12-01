@@ -105,10 +105,8 @@ getFr2Br cc = 24 * a + b
           b = getFr2BrB cc
 
 getFr2BrA :: CubieCube -> Int
-getFr2BrA cc = getFr2BrA' 0 $ reverse $ ep cc
-
-getFr2BrA' :: Int -> [Edge] -> Int
-getFr2BrA' = getA (\e -> FR <= e && e <= BR) 11 0
+getFr2BrA cc = getFr2BrA' $ reverse $ ep cc
+    where getFr2BrA' = getA (\e -> FR <= e && e <= BR) 11 0
 
 getFr2BrB :: CubieCube -> Int
 getFr2BrB cc = getFr2BrB' es 3 0
@@ -138,10 +136,8 @@ getUrf2Dlf cc = 720 * a + b
            b  = getUrf2DlfB cc
 
 getUrf2DlfA :: CubieCube -> Int
-getUrf2DlfA cc = getUrf2DlfA' 0 $ cp cc
-
-getUrf2DlfA' :: Int -> [Corner] -> Int
-getUrf2DlfA' = getA (\c -> c <= DLF) 0 7
+getUrf2DlfA cc = getUrf2DlfA' $ cp cc
+    where getUrf2DlfA' = getA (\c -> c <= DLF) 0 7
 
 getUrf2DlfB :: CubieCube -> Int
 getUrf2DlfB cc = getUrf2DlfB' cs 5 0
@@ -171,10 +167,8 @@ getUr2Ul cc = 6 * a + b
           b = getUr2UlB cc
 
 getUr2UlA :: CubieCube -> Int
-getUr2UlA cc = getUr2UlA' 0 $ ep cc
-
-getUr2UlA' :: Int -> [Edge] -> Int
-getUr2UlA' = getA (\e -> e <= UL) 0 11
+getUr2UlA cc = getUr2UlA' $ ep cc
+    where getUr2UlA' = getA (\e -> e <= UL) 0 11
 
 getUr2UlB :: CubieCube -> Int
 getUr2UlB cc = getUr2UlB' es 2 0
@@ -204,10 +198,8 @@ getUb2Df cc = 6 * a + b
           b = getUb2DfB cc
 
 getUb2DfA :: CubieCube -> Int
-getUb2DfA cc = getUb2DfA' 0 $ ep cc
-
-getUb2DfA' :: Int -> [Edge] -> Int
-getUb2DfA' = getA (\e -> UB <= e && e <= DF) 0 11
+getUb2DfA cc = getUb2DfA' $ ep cc
+    where getUb2DfA' = getA (\e -> UB <= e && e <= DF) 0 11
 
 getUb2DfB :: CubieCube -> Int
 getUb2DfB cc = getUb2DfB' es 2 0
@@ -238,10 +230,8 @@ getUr2Df cc = 720 * a + b
           b = getUr2DfB cc
 
 getUr2DfA :: CubieCube -> Int
-getUr2DfA cc = getUr2DfA' 0 $ ep cc
-
-getUr2DfA' :: Int -> [Edge] -> Int
-getUr2DfA' = getA (\e -> e <= DF) 0 11
+getUr2DfA cc = getUr2DfA' $ ep cc
+    where getUr2DfA' = getA (\e -> e <= DF) 0 11
 
 getUr2DfB :: CubieCube -> Int
 getUr2DfB cc = getUr2DfB' es 5 0
@@ -265,15 +255,18 @@ rotateUr2DfEdge6' k es i = if   ep /= i
           k'  = k+1
           es' = rotateLeft 0 i es
 
-getA :: (a -> Bool) -> Int -> Int -> Int -> [a] -> Int
-getA _ _ _ _ []     = 0
-getA f n k i (x:xs) = x' + getA f n k i' xs
-    where (x',i')   = if   f x
-                      then (ch, i+1)
-                      else (0,  i)
-          ch        = nc `choose` (i+1)
-          nc        = if n > 0 then n-j else j
-          j         = if k > 0 then k - length xs else length xs
+getA :: (a -> Bool) -> Int -> Int -> [a] -> Int
+getA = getA' 0
+
+getA' :: Int -> (a -> Bool) -> Int -> Int -> [a] -> Int
+getA' _ _ _ _ []     = 0
+getA' i f n k (x:xs) = x' + getA' i' f n k xs
+    where (x',i')    = if   f x
+                       then (ch, i+1)
+                       else (0,  i)
+          ch         = nc `choose` (i+1)
+          nc         = if n > 0 then n-j else j
+          j          = if k > 0 then k - length xs else length xs
 
 choose :: Int -> Int -> Int
 choose n k
