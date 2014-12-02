@@ -135,11 +135,11 @@ getUrf2Dlf cc = 720 * a + b
            b  = getUrf2DlfB cc
 
 getUrf2DlfA :: CubieCube -> Int
-getUrf2DlfA cc = getA (\c -> c <= DLF) 0 7 $ cp cc
+getUrf2DlfA cc = getA (<= DLF) 0 7 $ cp cc
 
 getUrf2DlfB :: CubieCube -> Int
 getUrf2DlfB cc = getUrf2DlfB' cs 5 0
-    where   cs = filter (\c -> c <= DLF) $ cp cc
+    where   cs = filter (<= DLF) $ cp cc
 
 getUrf2DlfB' :: [Corner] -> Int -> Int -> Int
 getUrf2DlfB' _  0 b = b
@@ -165,11 +165,11 @@ getUr2Ul cc = 6 * a + b
           b = getUr2UlB cc
 
 getUr2UlA :: CubieCube -> Int
-getUr2UlA cc = getA (\e -> e <= UL) 0 11 $ ep cc
+getUr2UlA cc = getA (<= UL) 0 11 $ ep cc
 
 getUr2UlB :: CubieCube -> Int
 getUr2UlB cc = getUr2UlB' es 2 0
-    where es = filter (\e -> e <= UL) $ ep cc
+    where es = filter (<= UL) $ ep cc
 
 getUr2UlB' :: [Edge] -> Int -> Int -> Int
 getUr2UlB' _  0 b = b
@@ -226,11 +226,11 @@ getUr2Df cc = 720 * a + b
           b = getUr2DfB cc
 
 getUr2DfA :: CubieCube -> Int
-getUr2DfA cc = getA (\e -> e <= DF) 0 11 $ ep cc
+getUr2DfA cc = getA (<= DF) 0 11 $ ep cc
 
 getUr2DfB :: CubieCube -> Int
 getUr2DfB cc = getUr2DfB' es 5 0
-    where es = filter (\e -> e <= DF) $ ep cc
+    where es = filter (<= DF) $ ep cc
 
 getUr2DfB' :: [Edge] -> Int -> Int -> Int
 getUr2DfB' _  0 b = b
