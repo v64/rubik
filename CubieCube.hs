@@ -260,8 +260,8 @@ getA' i f n k (x:xs) = x' + getA' i' f n k xs
                        then (ch, i+1)
                        else (0,  i)
           ch         = nc `choose` (i+1)
-          nc         = if n > 0 then n-j else j
-          j          = if k > 0 then k - length xs else length xs
+          nc         = if n > 0 then n-l else l
+          l          = if k > 0 then k - length xs else length xs
 
 choose :: Int -> Int -> Int
 choose n k
