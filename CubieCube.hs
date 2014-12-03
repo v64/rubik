@@ -100,64 +100,29 @@ getParity cc  = n `mod` 2
                 0 ps
 
 getFr2Br :: CubieCube -> Int
-getFr2Br cc = 24 * a + b
-    where a = getFr2BrA cc
-          b = getFr2BrB cc
-
-getFr2BrA :: CubieCube -> Int
-getFr2BrA cc = getA (\e -> FR <= e && e <= BR) 11 0 $ reverse $ ep cc
-
-getFr2BrB :: CubieCube -> Int
-getFr2BrB cc = getB (\ep i -> ep /= i+8) es 3
-    where es = filter (\e -> FR <= e && e <= BR) $ ep cc
+getFr2Br      cc = 24 * (goA cc) + (goB cc)
+    where goA cc = getA (\e -> FR <= e && e <= BR) 11 0 $ reverse $ ep cc
+          goB cc = getB (\ep i -> ep /= i+8) $ filter (\e -> FR <= e && e <= BR) $ ep cc
 
 getUrf2Dlf :: CubieCube -> Int
-getUrf2Dlf cc = 720 * a + b
-    where  a  = getUrf2DlfA cc
-           b  = getUrf2DlfB cc
-
-getUrf2DlfA :: CubieCube -> Int
-getUrf2DlfA cc = getA (<= DLF) 0 7 $ cp cc
-
-getUrf2DlfB :: CubieCube -> Int
-getUrf2DlfB cc = getB (/=) cs 5
-    where   cs = filter (<= DLF) $ cp cc
+getUrf2Dlf    cc = 720 * (goA cc) + (goB cc)
+    where goA cc = getA (<= DLF) 0 7 $ cp cc
+          goB cc = getB (/=) $ filter (<= DLF) $ cp cc
 
 getUr2Ul :: CubieCube -> Int
-getUr2Ul cc = 6 * a + b
-    where a = getUr2UlA cc
-          b = getUr2UlB cc
-
-getUr2UlA :: CubieCube -> Int
-getUr2UlA cc = getA (<= UL) 0 11 $ ep cc
-
-getUr2UlB :: CubieCube -> Int
-getUr2UlB cc = getB (/=) es 2
-    where es = filter (<= UL) $ ep cc
+getUr2Ul      cc = 6 * (goA cc) + (goB cc)
+    where goA cc = getA (<= UL) 0 11 $ ep cc
+          goB cc = getB (/=) $ filter (<= UL) $ ep cc
 
 getUb2Df :: CubieCube -> Int
-getUb2Df cc = 6 * a + b
-    where a = getUb2DfA cc
-          b = getUb2DfB cc
-
-getUb2DfA :: CubieCube -> Int
-getUb2DfA cc = getA (\e -> UB <= e && e <= DF) 0 11 $ ep cc
-
-getUb2DfB :: CubieCube -> Int
-getUb2DfB cc = getB (\ep i -> ep /= 3+i) es 2
-    where es = filter (\e -> UB <= e && e <= DF) $ ep cc
+getUb2Df      cc = 6 * (goA cc) + (goB cc)
+    where goA cc = getA (\e -> UB <= e && e <= DF) 0 11 $ ep cc
+          goB cc = getB (\ep i -> ep /= 3+i) $ filter (\e -> UB <= e && e <= DF) $ ep cc
 
 getUr2Df :: CubieCube -> Int
-getUr2Df cc = 720 * a + b
-    where a = getUr2DfA cc
-          b = getUr2DfB cc
-
-getUr2DfA :: CubieCube -> Int
-getUr2DfA cc = getA (<= DF) 0 11 $ ep cc
-
-getUr2DfB :: CubieCube -> Int
-getUr2DfB cc = getB (/=) es 5
-    where es = filter (<= DF) $ ep cc
+getUr2Df      cc = 720 * (goA cc) + (goB cc)
+    where goA cc = getA (<= DF) 0 11 $ ep cc
+          goB cc = getB (/=) $ filter (<= DF) $ ep cc
 
 getA :: (a -> Bool) -> Int -> Int -> [a] -> Int
 getA = getA' 0
@@ -172,12 +137,12 @@ getA' i f n k (x:xs) = x' + getA' i' f n k xs
           nc         = if n > 0 then n-l else l
           l          = if k > 0 then k - length xs else length xs
 
-getB :: (Enum a) => (Int -> Int -> Bool) -> [a] -> Int -> Int
-getB = getB' 0
+getB :: (Enum a) => (Int -> Int -> Bool) -> [a] -> Int
+getB f xs = getB' (length xs - 1) 0 f xs
 
-getB' :: (Enum a) => Int -> (Int -> Int -> Bool) -> [a] -> Int -> Int
-getB' b _ _  0    = b
-getB' b f xs i    = getB' b' f xs' i'
+getB' :: (Enum a) => Int -> Int -> (Int -> Int -> Bool) -> [a] -> Int
+getB' 0 b _ _     = b
+getB' i b f xs    = getB' i' b' f xs'
     where (xs',k) = rotateCubie f xs i
           i'      = i-1
           b'      = (i+1) * b + k
