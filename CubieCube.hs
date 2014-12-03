@@ -100,11 +100,11 @@ getParity cc  = n `mod` 2
                 0 ps
 
 getFr2Br :: CubieCube -> Int
-getFr2Br  cc = 24 * a + b
-    where a  = getA f 11 0 $ reverse xs
-          b  = getB (\ep i -> ep /= i+8) $ filter f xs
-          f  = (\e -> FR <= e && e <= BR)
-          xs = ep cc
+getFr2Br  cc  = 24 * a + b
+    where a   = getA f 11 0 $ reverse xs
+          b   = getB (\ep i -> ep /= i+8) $ filter f xs
+          f e = FR <= e && e <= BR
+          xs  = ep cc
 
 getUrf2Dlf :: CubieCube -> Int
 getUrf2Dlf cc = 720 * a + b
@@ -121,11 +121,11 @@ getUr2Ul  cc = 6 * a + b
           xs = ep cc
 
 getUb2Df :: CubieCube -> Int
-getUb2Df  cc = 6 * a + b
-    where a  = getA f 0 11 xs
-          b  = getB (\ep i -> ep /= 3+i) $ filter f xs
-          f  = (\e -> UB <= e && e <= DF)
-          xs = ep cc
+getUb2Df  cc  = 6 * a + b
+    where a   = getA f 0 11 xs
+          b   = getB (\ep i -> ep /= 3+i) $ filter f xs
+          f e = UB <= e && e <= DF
+          xs  = ep cc
 
 getUr2Df :: CubieCube -> Int
 getUr2Df  cc = 720 * a + b
