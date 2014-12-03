@@ -123,7 +123,7 @@ getUr2Ul  cc = 6 * a + b
 getUb2Df :: CubieCube -> Int
 getUb2Df  cc  = 6 * a + b
     where a   = getA f 0 11 xs
-          b   = getB (\ep i -> ep /= 3+i) $ filter f xs
+          b   = getB (\ep i -> ep /= i+3) $ filter f xs
           f e = UB <= e && e <= DF
           xs  = ep cc
 
