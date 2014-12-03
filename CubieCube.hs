@@ -101,32 +101,37 @@ getParity cc  = n `mod` 2
 
 getFr2Br :: CubieCube -> Int
 getFr2Br  cc = 24 * a + b
-    where a  = getA (\e -> FR <= e && e <= BR) 11 0 $ reverse xs
-          b  = getB (\ep i -> ep /= i+8) $ filter (\e -> FR <= e && e <= BR) xs
+    where a  = getA f 11 0 $ reverse xs
+          b  = getB (\ep i -> ep /= i+8) $ filter f xs
+          f  = (\e -> FR <= e && e <= BR)
           xs = ep cc
 
 getUrf2Dlf :: CubieCube -> Int
 getUrf2Dlf cc = 720 * a + b
-    where  a  = getA (<= DLF) 0 7 xs
-           b  = getB (/=) $ filter (<= DLF) xs
+    where  a  = getA f 0 7 xs
+           b  = getB (/=) $ filter f xs
+           f  = (<= DLF)
            xs = cp cc
 
 getUr2Ul :: CubieCube -> Int
 getUr2Ul  cc = 6 * a + b
-    where a  = getA (<= UL) 0 11 xs
-          b  = getB (/=) $ filter (<= UL) xs
+    where a  = getA f 0 11 xs
+          b  = getB (/=) $ filter f xs
+          f  = (<= UL)
           xs = ep cc
 
 getUb2Df :: CubieCube -> Int
 getUb2Df  cc = 6 * a + b
-    where a  = getA (\e -> UB <= e && e <= DF) 0 11 xs
-          b  = getB (\ep i -> ep /= 3+i) $ filter (\e -> UB <= e && e <= DF) xs
+    where a  = getA f 0 11 xs
+          b  = getB (\ep i -> ep /= 3+i) $ filter f xs
+          f  = (\e -> UB <= e && e <= DF)
           xs = ep cc
 
 getUr2Df :: CubieCube -> Int
 getUr2Df  cc = 720 * a + b
-    where a  = getA (<= DF) 0 11 xs
-          b  = getB (/=) $ filter (<= DF) xs
+    where a  = getA f 0 11 xs
+          b  = getB (/=) $ filter f xs
+          f  = (<= DF)
           xs = ep cc
 
 getA :: (a -> Bool) -> Int -> Int -> [a] -> Int
