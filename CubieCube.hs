@@ -100,27 +100,27 @@ getParity cc  = n `mod` 2
                 0 ps
 
 getFr2Br :: CubieCube -> Int
-getFr2Br      cc = 24 * (goA cc) + (goB cc)
+getFr2Br      cc = 24 * goA cc + goB cc
     where goA cc = getA (\e -> FR <= e && e <= BR) 11 0 $ reverse $ ep cc
           goB cc = getB (\ep i -> ep /= i+8) $ filter (\e -> FR <= e && e <= BR) $ ep cc
 
 getUrf2Dlf :: CubieCube -> Int
-getUrf2Dlf    cc = 720 * (goA cc) + (goB cc)
+getUrf2Dlf    cc = 720 * goA cc + goB cc
     where goA cc = getA (<= DLF) 0 7 $ cp cc
           goB cc = getB (/=) $ filter (<= DLF) $ cp cc
 
 getUr2Ul :: CubieCube -> Int
-getUr2Ul      cc = 6 * (goA cc) + (goB cc)
+getUr2Ul      cc = 6 * goA cc + goB cc
     where goA cc = getA (<= UL) 0 11 $ ep cc
           goB cc = getB (/=) $ filter (<= UL) $ ep cc
 
 getUb2Df :: CubieCube -> Int
-getUb2Df      cc = 6 * (goA cc) + (goB cc)
+getUb2Df      cc = 6 * goA cc + goB cc
     where goA cc = getA (\e -> UB <= e && e <= DF) 0 11 $ ep cc
           goB cc = getB (\ep i -> ep /= 3+i) $ filter (\e -> UB <= e && e <= DF) $ ep cc
 
 getUr2Df :: CubieCube -> Int
-getUr2Df      cc = 720 * (goA cc) + (goB cc)
+getUr2Df      cc = 720 * goA cc + goB cc
     where goA cc = getA (<= DF) 0 11 $ ep cc
           goB cc = getB (/=) $ filter (<= DF) $ ep cc
 
