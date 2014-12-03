@@ -133,7 +133,7 @@ getUrf2DlfB cc = getUrf2DlfB' cs 5 0
 getUrf2DlfB' :: [Corner] -> Int -> Int -> Int
 getUrf2DlfB' _  0 b = b
 getUrf2DlfB' cs i b = getUrf2DlfB' cs' i' b'
-    where (cs',k)   = rotateCubie (\cp i -> cp /= i) cs i
+    where (cs',k)   = rotateCubie (/=) cs i
           i'        = i-1
           b'        = (i+1) * b + k
 
@@ -152,7 +152,7 @@ getUr2UlB cc = getUr2UlB' es 2 0
 getUr2UlB' :: [Edge] -> Int -> Int -> Int
 getUr2UlB' _  0 b = b
 getUr2UlB' es i b = getUr2UlB' es' i' b'
-    where (es',k) = rotateCubie (\ep i -> ep /= i) es i
+    where (es',k) = rotateCubie (/=) es i
           i'      = i-1
           b'      = (i+1) * b + k
 
@@ -190,7 +190,7 @@ getUr2DfB cc = getUr2DfB' es 5 0
 getUr2DfB' :: [Edge] -> Int -> Int -> Int
 getUr2DfB' _  0 b = b
 getUr2DfB' es i b = getUr2DfB' es' i' b'
-    where (es',k) = rotateCubie (\ep i -> ep /= i) es i
+    where (es',k) = rotateCubie (/=) es i
           i'      = i-1
           b'      = (i+1) * b + k
 
