@@ -1,5 +1,5 @@
 module FaceCube (
-    CubieCube (..),
+    FaceCube (..),
     toFaceCube,
     toCubieCube
 ) where
