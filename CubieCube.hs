@@ -27,8 +27,8 @@ idCubieCube = CubieCube {
     eo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 }
 
-rawCubieCube :: [Corner] -> [Int] -> [Edge] -> [Int] -> CubieCube
-rawCubieCube cp' co' ep' eo' = CubieCube {
+getCubieCube :: [Corner] -> [Int] -> [Edge] -> [Int] -> CubieCube
+getCubieCube cp' co' ep' eo' = CubieCube {
     cp = cp',
     co = co',
     ep = ep',
@@ -37,12 +37,12 @@ rawCubieCube cp' co' ep' eo' = CubieCube {
 
 moveCube :: [CubieCube]
 moveCube = [cc0,cc1,cc2,cc3,cc4,cc5]
-    where cc0 = rawCubieCube cpU coU epU eoU
-          cc1 = rawCubieCube cpR coR epR eoR
-          cc2 = rawCubieCube cpF coF epF eoF
-          cc3 = rawCubieCube cpD coD epD eoD
-          cc4 = rawCubieCube cpL coL epL eoL
-          cc5 = rawCubieCube cpB coB epB eoB
+    where cc0 = getCubieCube cpU coU epU eoU
+          cc1 = getCubieCube cpR coR epR eoR
+          cc2 = getCubieCube cpF coF epF eoF
+          cc3 = getCubieCube cpD coD epD eoD
+          cc4 = getCubieCube cpL coL epL eoL
+          cc5 = getCubieCube cpB coB epB eoB
           cpU = [UBR, URF, UFL, ULB, DFR, DLF, DBL, DRB]
           coU = [0, 0, 0, 0, 0, 0, 0, 0]
           epU = [UB, UR, UF, UL, DR, DF, DL, DB, FR, FL, BL, BR]
