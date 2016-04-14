@@ -13,10 +13,10 @@ import Data.List (foldl')
 import Edge
 
 data CubieCube = CubieCube {
-    cp :: [Corner],
-    co :: [Int],
-    ep :: [Edge],
-    eo :: [Int]
+    cp :: [Corner], -- corner permutation
+    co :: [Int],    -- corner orientation
+    ep :: [Edge],   -- edge permutation
+    eo :: [Int]     -- edge orientation
 } deriving (Eq, Show)
 
 idCubieCube :: CubieCube
