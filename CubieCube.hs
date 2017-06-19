@@ -184,7 +184,7 @@ chooseIndex = [ [ choose n k
               ]
 
 slice :: Int -> Int -> [a] -> [a]
-slice a b xs = take (b-a+1) . drop a $ xs
+slice a b = take (b-a+1) . drop a
 
 takeR :: Int -> [a] -> [a]
 takeR n l = go (drop n l) l

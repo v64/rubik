@@ -5,19 +5,20 @@ main :: IO ()
 main = do
     -- let facelets = "DUDLUDLFDRBRFRBLUUBUBLFRLDFFFUDDBRDRBFUBLUULDFRLRBLBRF"
     -- let facelets = "LFUDUDFLBUBFURBDURRFLRFFBUFDLLDDBLLBDRDBLUFFRRRBRBLUDU"
-    let facelets = "UFBBUFUUBLRLURBRBDBRDLFBRFFFDDDDRFFBFDRLLULRUUULLBDRLD"
+    -- let facelets = "UFBBUFUUBLRLURBRBDBRDLFBRFFFDDDDRFFBFDRLLULRUUULLBDRLD"
     -- let facelets = "UFBUUBFRBLDUURRDUUDDDLFBBBRULFDDLBDLRFLRLFRFLRRFBBUFLD"
-    -- let facelets = "BLFBULURDLDDFRLURRBFFUFDRULBBFBDUDDUUDRBLFLRDRULFBLFRB"
+    let facelets = "BLFBULURDLDDFRLURRBFFUFDRULBBFBDUDDUUDRBLFLRDRULFBLFRB"
 
     -- let c = (toCoordCube . toCubieCube . toFaceCube) facelets
     -- putStrLn $ show c
 
+    print $ show facelets
     let fc = toFaceCube facelets
-    putStrLn $ show fc
+    print $ show fc
     let cc = toCubieCube fc
-    putStrLn $ show cc
+    print $ show cc
     let c  = toCoordCube cc
-    putStrLn $ show c
+    print $ show c
 
     -- let cube1 = "UFBUUBFRBLDUURRDUUDDDLFBBBRULFDDLBDLRFLRLFRFLRRFBBUFLD"
     -- let cube2 = "BLFBULURDLDDFRLURRBFFUFDRULBBFBDUDDUUDRBLFLRDRULFBLFRB"

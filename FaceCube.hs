@@ -116,7 +116,7 @@ eColors fs i j
           j'   = fromEnum j
           col1 = fs !! fromEnum ef1
           col2 = fs !! fromEnum ef2
-          ef1  = edgeFacelet !! i' !! 0
-          ec1  = edgeColor   !! j' !! 0
+          ef1  = head (edgeFacelet !! i')
+          ec1  = head (edgeColor   !! j')
           ef2  = edgeFacelet !! i' !! 1
           ec2  = edgeColor   !! j' !! 1
